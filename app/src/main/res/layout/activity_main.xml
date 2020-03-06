@@ -7,9 +7,6 @@
     tools:context=".MainActivity">
 
 
-
-
-
     <FrameLayout
         android:id="@+id/fragnment_container"
         android:layout_width="match_parent"
@@ -22,24 +19,22 @@
 
         <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/recycle_layout1"
         android:layout_marginTop="15dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:id="@+id/recycle_view"
-            android:layout_marginTop="60dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp">
+            </androidx.recyclerview.widget.RecyclerView>
 
-
-            >
-
-        </androidx.recyclerview.widget.RecyclerView>
-
+        </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -59,30 +54,23 @@
 
                 </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="320dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycle_view_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="195dp"
+
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp"></androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+
             </RelativeLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="380dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:layout_height="240dp"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:id="@+id/recycle_view_1"
-                android:layout_marginTop="10dp"
-
-
-                >
-
-            </androidx.recyclerview.widget.RecyclerView>
-        </RelativeLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,6 +78,7 @@
             <SearchView
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:queryHint="Search Here"
                 android:layout_height="match_parent">
             </SearchView>
         </LinearLayout>

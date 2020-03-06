@@ -27,7 +27,7 @@ public class HistoryActivity extends AppCompatActivity {
     ListView listView;
 
     FirebaseAuth firebaseAuth;
-FirebaseUser userID;
+    FirebaseUser userID;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
