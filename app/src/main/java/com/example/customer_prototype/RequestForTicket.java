@@ -120,6 +120,11 @@ public class RequestForTicket extends AppCompatActivity {
                 reference.child(firebaseAuth.getCurrentUser().getUid()).child("MC"+String.valueOf(userId)).child("Issue").setValue(spinner.getSelectedItem().toString());
 
 
+                //reference.child("MC"+String.valueOf(userId)).child("Details").setValue(details);
+                //reference.child("MC"+String.valueOf(userId)).child("Issue").setValue(spinner.getSelectedItem().toString());
+
+                //reference.child("MC"+String.valueOf(userId)).child("UserID").setValue(firebaseAuth.getCurrentUser().getUid());
+
                 Toast.makeText(RequestForTicket.this, "value Stored Succesfully", Toast.LENGTH_SHORT).show();
 
                 //reference.child("MC"+String.valueOf(userId)).setValue(member);

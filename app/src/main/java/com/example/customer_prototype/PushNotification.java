@@ -68,16 +68,12 @@ public class PushNotification extends FirebaseMessagingService {
                     .setContentText(message)
                     .setSmallIcon(R.drawable.coffee);
         }
-
         NotificationManager notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel notificationChannel=new NotificationChannel(channel_id,"web_app",NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.setSound(uri,null);
             notificationManager.createNotificationChannel(notificationChannel);
         }
-
         notificationManager.notify(0,builder.build());
     }
-
-
 }
