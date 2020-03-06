@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".About">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutForButton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@drawable/button_border"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:background="@drawable/button_border"
+            android:id="@+id/btnFood"
+            android:textSize="12sp"
+            android:layout_marginStart="20dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parking"
+            android:id="@+id/btnParing"
+            android:background="@drawable/button_border"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:layout_marginStart="35dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hospial"
+            android:background="@drawable/button_border"
+            android:id="@+id/btnHospital"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:layout_marginStart="31dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:id="@+id/mapLayout"
+        android:gravity="center"
+        android:layout_below="@+id/linearLayoutForButton"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+
+        >
+
+        <fragment
+            android:id="@+id/map_fragnment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="65dp"
+
+          ></fragment>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation"></com.google.android.material.bottomnavigation.BottomNavigationView>
+    </RelativeLayout>
+
+</RelativeLayout>

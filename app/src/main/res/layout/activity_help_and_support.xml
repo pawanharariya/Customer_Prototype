@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#FFF"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imgCustomer"
+        android:layout_width="262dp"
+
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="-80dp"
+        android:layout_marginEnd="74dp"
+        android:src="@drawable/undraw" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgCustomer"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp">
+
+        <Button
+            android:id="@+id/btnHistory"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="67dp"
+            android:background="@drawable/joinbtn"
+
+            android:text="Ticket History"
+            android:textAllCaps="false"
+            android:textColor="#FFF"
+            android:textSize="22sp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btnRequest"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/btnHistory"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="67dp"
+            android:background="@drawable/joinbtn"
+
+            android:text="Request Ticket"
+            android:textAllCaps="false"
+            android:textColor="#FFF"
+            android:textSize="22sp"
+            android:textStyle="italic" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

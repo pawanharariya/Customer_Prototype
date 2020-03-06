@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home"
+        ></item>
+
+    <item
+        android:id="@+id/dashboard1"
+        android:title="Wallet"
+        android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+        ></item>
+
+    <item
+        android:id="@+id/about"
+        android:title="Stores"
+        android:icon="@drawable/ic_local_grocery"></item>
+
+</menu>

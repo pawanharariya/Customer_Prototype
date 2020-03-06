@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RequestForTicket">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit a Ticket for assistance"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:id="@+id/layout"
+        android:gravity="center"
+        >
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            ></Spinner>
+
+        <EditText
+            android:id="@+id/etDetails"
+            android:layout_below="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:layout_marginRight="20dp"
+            android:hint="Write Some Details of Orders"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:textStyle="normal"
+            android:layout_marginTop="20dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+
+        >
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginLeft="6dp"
+            android:textStyle="normal"
+            android:textSize="15sp"
+            android:background="@drawable/joinbtn"
+            />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="240dp"
+            android:background="@drawable/joinbtn"
+            android:text="Cancel"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

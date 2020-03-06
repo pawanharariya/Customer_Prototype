@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#FFF"
+    android:orientation="vertical"
+    tools:context=".PayMent">
+
+
+    <LinearLayout
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="-70dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/payment_img"
+        android:gravity="center">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15sp"
+        android:gravity="center">
+    <EditText
+        android:id="@+id/enterAmount"
+        android:background="@drawable/joinbtn"
+        android:backgroundTint="#5CE6E5E5"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginRight="20dp"
+
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        android:hint="Amount"></EditText>
+
+        <Button
+            android:id="@+id/btnPay"
+            android:layout_width="280dp"
+            android:gravity="center"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="PAY MONEY"
+            android:textAllCaps="false"
+            android:background="@drawable/joinbtn"
+            android:textColor="@color/whitecolor"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
