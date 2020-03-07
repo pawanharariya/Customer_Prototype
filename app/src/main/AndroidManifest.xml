@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -32,9 +33,11 @@
 
         <activity android:name=".OrdersActivity" />
         <activity android:name=".RequestForTicket" />
+        <activity android:name=".MyAccountUser"></activity>
         <activity android:name=".HistoryActivity" />
         <activity android:name=".HelpAndSupport" />
         <activity android:name=".ScannerActivity" />
+        <activity android:name=".MyAccoutn"></activity>
         <activity android:name=".Home" />
         <activity android:name=".Dashboard" />
         <activity android:name=".About" />

@@ -48,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
         userID=firebaseAuth.getCurrentUser();
-        databaseReference=FirebaseDatabase.getInstance().getReference().child(userID.getUid());
+        databaseReference=FirebaseDatabase.getInstance().getReference("Help And Support").child(userID.getUid());
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {

@@ -5,7 +5,7 @@
     android:gravity="center"
     android:layout_height="match_parent"
     android:background="#FFF"
-    tools:context=".MyAccoutn">
+   >
 
 
 
@@ -13,12 +13,12 @@
         android:id="@+id/ivProfileUpdate"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:src="@drawable/coffee"
+        android:src="@drawable/download"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
-       />
+        />
 
     <EditText
         android:id="@+id/etNameUpdate"
@@ -46,7 +46,7 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-       />
+        />
 
     <EditText
         android:id="@+id/etCarNumber"
@@ -60,7 +60,7 @@
         android:ems="10"
         android:hint="Car Nūmber"
         android:inputType="textEmailAddress"
-       />
+        />
     <EditText
         android:id="@+id/etCarModel"
         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Update"
-      />
+        />
 
 
 

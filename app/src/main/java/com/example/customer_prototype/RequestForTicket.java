@@ -54,7 +54,7 @@ public class RequestForTicket extends AppCompatActivity {
         btnSubmit=findViewById(R.id.submit);
         member=new Members();
 
-        reference=database.getInstance().getReference();
+        reference=database.getInstance().getReference().child("Help And Support");
 
         List<String> list=new ArrayList<>();
         list.add(0,"Select Issue");
@@ -115,10 +115,11 @@ public class RequestForTicket extends AppCompatActivity {
                 // member.setIssue(spinner.getSelectedItem().toString());
 
                 String key=reference.push().getKey();
+                String s="open";
 
                 reference.child(firebaseAuth.getCurrentUser().getUid()).child("MC"+String.valueOf(userId)).child("Details").setValue(details);
                 reference.child(firebaseAuth.getCurrentUser().getUid()).child("MC"+String.valueOf(userId)).child("Issue").setValue(spinner.getSelectedItem().toString());
-
+                reference.child(firebaseAuth.getCurrentUser().getUid()).child("MC"+String.valueOf(userId)).child("status").setValue(s);
 
                 //reference.child("MC"+String.valueOf(userId)).child("Details").setValue(details);
                 //reference.child("MC"+String.valueOf(userId)).child("Issue").setValue(spinner.getSelectedItem().toString());
