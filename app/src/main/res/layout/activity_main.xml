@@ -73,14 +73,45 @@
             </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutForButton"
             android:layout_width="match_parent"
-            android:layout_height="65dp">
-            <SearchView
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:queryHint="Search Here"
-                android:layout_height="match_parent">
-            </SearchView>
+            android:layout_height="36dp"
+            android:background="@drawable/button_border"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Free Food"
+                android:background="@drawable/button_border"
+                android:id="@+id/btnFood"
+                android:textSize="12sp"
+                android:layout_marginStart="20dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free Parking"
+                android:id="@+id/btnParing"
+                android:background="@drawable/button_border"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:layout_marginStart="35dp"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free ospial"
+                android:background="@drawable/button_border"
+                android:id="@+id/btnHospital"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:layout_marginStart="31dp"
+                />
+
         </LinearLayout>
 
 
