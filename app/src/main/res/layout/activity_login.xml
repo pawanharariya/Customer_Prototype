@@ -22,11 +22,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="40dp">
-
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/parkinglogo" />
+                android:src="@drawable/parkinglogo"
+                />
             />
         </LinearLayout>
         <com.rilixtech.widget.countrycodepicker.CountryCodePicker
@@ -42,12 +42,11 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:background="@color/common_google_signin_btn_text_light_disabled"
+            android:background="?attr/colorControlHighlight"
             android:elevation="5dp"
             android:hint="Mobile Number"
             android:inputType="phone"
-            android:paddingLeft="15dp"
-            tools:visibility="visible" />
+            android:paddingLeft="15dp" />
 
         <Button
             android:id="@+id/generate_btn"
