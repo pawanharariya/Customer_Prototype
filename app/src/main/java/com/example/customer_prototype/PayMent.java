@@ -20,6 +20,7 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
     EditText et_Amount;
     Button payment;
     float amount;
+    Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,14 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
 
         et_Amount=findViewById(R.id.enterAmount);
         payment=findViewById(R.id.btnPay);
+        back=findViewById(R.id.back_btn);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
