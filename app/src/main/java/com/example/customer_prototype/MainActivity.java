@@ -22,6 +22,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE=101;
+    Button btnNearstFood,btnNearstHospital,btnNearstParking;
+
     GoogleMap mGoogleMap;
 
 
@@ -86,6 +89,12 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         setSupportActionBar(toolbar);
         //location st karne ka code on toolbar
 
+
+        btnNearstFood=findViewById(R.id.btnFood);
+        btnNearstHospital=findViewById(R.id.btnHospital);
+        btnNearstParking=findViewById(R.id.btnParing);
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
@@ -100,13 +109,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 Toast.makeText(MainActivity.this, "not Found permission", Toast.LENGTH_SHORT).show();
             }
         }
-
-
-
-
-
-
-
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
@@ -132,6 +134,27 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 }
 
                 return false;
+            }
+        });
+
+        btnNearstFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,NearstFoodActivity.class));
+            }
+        });
+
+        btnNearstParking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
+            }
+        });
+
+        btnNearstHospital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,FreeTravelMap.class));
             }
         });
 
