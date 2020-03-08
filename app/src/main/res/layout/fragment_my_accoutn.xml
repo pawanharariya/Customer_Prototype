@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:gravity="center"
@@ -8,13 +8,23 @@
     android:background="@drawable/account_wall"
     tools:context=".MyAccoutn">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:orientation="vertical">
 
     <Button
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:background="@drawable/backicon"
         android:layout_marginLeft="-170dp"
+        android:layout_marginTop="-65dp"
+        android:layout_gravity="center"
         />
 
     <TextView
@@ -22,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Users Profile"
         android:textSize="28sp"
-
+        android:layout_gravity="center"
         android:layout_marginTop="-32.5dp"
 
         />
@@ -32,9 +42,9 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:src="@drawable/profile_up"
+        android:layout_gravity="center"
         android:layout_marginTop="60dp"
-
-       />
+        />
 
     <EditText
         android:layout_marginTop="60dp"
@@ -43,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivProfileUpdate"
         android:ems="10"
+        android:layout_gravity="center"
         android:hint="Username"
         android:textColorHint="#A1FFFFFF"
         android:inputType="textPersonName"
@@ -55,6 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etNameUpdate"
         android:ems="10"
+        android:layout_gravity="center"
         android:textColorHint="#A1FFFFFF"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -67,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etEmailUpdate"
         android:ems="10"
+        android:layout_gravity="center"
         android:textColorHint="#A1FFFFFF"
         android:hint="Car Number"
         android:inputType="textEmailAddress"
@@ -78,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etCarNumber"
         android:ems="10"
+        android:layout_gravity="center"
         android:textColorHint="#A1FFFFFF"
         android:hint="Car Model"
         android:inputType="textEmailAddress"
@@ -91,7 +105,10 @@
         android:background="@drawable/join_button"
         android:layout_below="@id/etCarModel"
         android:text="Update"
+        android:layout_gravity="center"
       />
 
 
 </LinearLayout>
+
+</RelativeLayout>
