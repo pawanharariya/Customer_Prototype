@@ -10,10 +10,10 @@
 
 
     <Button
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:background="@drawable/backicon"
-        android:layout_marginTop="-75dp"
+        android:layout_marginTop="-65dp"
         android:layout_marginLeft="-170dp"
         />
 

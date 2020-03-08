@@ -39,6 +39,7 @@ public class MyAccoutn extends AppCompatActivity {
 
     private EditText newUserName, newUserEmail, newUserCarNumber,newUserCarModel;
     private Button save;
+    private Button back;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private ImageView updateProfilePic;
@@ -70,6 +71,14 @@ public class MyAccoutn extends AppCompatActivity {
 
         DatabaseReference databaseReference=firebaseDatabase.getReference().child("UserProfile");
 
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
        updateProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
