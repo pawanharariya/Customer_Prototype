@@ -73,13 +73,6 @@ public class MyAccoutn extends AppCompatActivity {
 
 
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
        updateProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
