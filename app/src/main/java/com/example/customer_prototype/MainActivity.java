@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         btnNearstFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,NearstFoodActivity.class));
+                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
             }
         });
 
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         btnNearstHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,FreeTravelMap.class));
+                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
             }
         });
 
