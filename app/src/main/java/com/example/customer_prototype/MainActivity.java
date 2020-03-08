@@ -34,6 +34,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,12 +51,16 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private static final int REQUEST_CODE=101;
     Button btnNearstFood,btnNearstHospital,btnNearstParking;
 
+
+    TextView txtName,txtEmail;
+
     GoogleMap mGoogleMap;
 
 
-
-    private FirebaseAuth mAuth;
-    private FirebaseUser mCurrentUser;
+     FirebaseAuth mAuth;
+     FirebaseUser mCurrentUser;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     private Button mLogoutBtn;
 
@@ -78,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     TextView textView;
     Location location;
+    View viewHeader;
 
 
     @Override
@@ -170,10 +180,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                     new fragment_home()).commit();
         }*/
 
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
-
-
        // fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
         //fetchLocation();
 
@@ -181,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         setSupportActionBar(Drawertoolbar);
 
         mNavDrawer=findViewById(R.id.drawer_layout);
+
 
         //assign variable
         recyclerView=findViewById(R.id.recycle_view);
@@ -226,8 +233,32 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         adapter1=new OrderAdapter(this,al1);
         recyclerView.setAdapter(mainAdapter);
         recyclerView1.setAdapter(adapter1);
-        //navigation bar ka code
+
+        //navigation header ka code
         NavigationView navigationView=findViewById(R.id.navigation_view);
+        viewHeader=navigationView.getHeaderView(0);
+
+        mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
+
+        txtEmail=viewHeader.findViewById(R.id.headeremail);
+        txtName=viewHeader.findViewById(R.id.headername);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name=dataSnapshot.child("name").getValue().toString();
+                String email=dataSnapshot.child("email").getValue().toString();
+                txtName.setText(name);
+                txtEmail.setText(email);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mNavDrawer,Drawertoolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);

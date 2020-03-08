@@ -104,7 +104,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Free ospial"
+                android:text="Free Hospital"
                 android:background="@drawable/button_border"
                 android:id="@+id/btnHospital"
                 android:layout_gravity="center"
