@@ -48,6 +48,7 @@
             android:elevation="5dp"
             android:hint="Mobile Number"
             android:inputType="phone"
+            android:textColor="#fff"
             android:textColorHint="#A1FFFFFF"
             android:paddingLeft="15dp" />
 
