@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="#FFF"
@@ -8,35 +8,48 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:gravity="bottom"
     >
-    <ImageView
-        android:id="@+id/userImage"
-        android:layout_width="87dp"
+    <LinearLayout
+        android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/profile_icon" />
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="87dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile_icon" />
+    </LinearLayout>
 
+<LinearLayout
+    android:layout_width="270dp"
+    android:layout_height="100dp"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/headername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginLeft="70dp"
+        android:layout_width="230dp"
+        android:layout_height="35dp"
         android:text="Customer Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#C51162"
-        android:textSize="15sp"
-        android:layout_marginBottom="20dp"/>
+        android:textSize="14sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        />
 
 
     <TextView
         android:id="@+id/headeremail"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginLeft="80dp"
+        android:layout_width="230dp"
+        android:layout_height="35dp"
         android:layout_below="@+id/headername"
         android:text="Customer Email"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#C51162"
-        android:textSize="15sp"
-        android:layout_marginBottom="25dp"/>
-        </RelativeLayout>
+        android:textSize="10sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+
+        />
+
+</LinearLayout>
+
+</LinearLayout>
