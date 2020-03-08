@@ -356,22 +356,22 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
 
 
-    // @Override
-    /*protected void onStart() {
+    @Override
+    protected void onStart() {
         super.onStart();
        if(mCurrentUser == null){
            // sendUserToLogin();
 
         }
-    }*/
+    }
 
-   /* private void sendUserToLogin() {
+    private void sendUserToLogin() {
         Intent loginIntent = new Intent(MainActivity.this,LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
-    }*/
+    }
 
    /* private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
