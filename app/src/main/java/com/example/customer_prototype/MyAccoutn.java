@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -24,8 +25,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -62,18 +66,17 @@ public class MyAccoutn extends AppCompatActivity {
         save = findViewById(R.id.btnSave);
         updateProfilePic = findViewById(R.id.ivProfileUpdate);
 
-        firebaseAuth=FirebaseAuth.getInstance();
-        firebaseDatabase=FirebaseDatabase.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
 
-        firebaseStorage=FirebaseStorage.getInstance();
-        storageReference=firebaseStorage.getReference();
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
 
-        DatabaseReference databaseReference=firebaseDatabase.getReference().child("UserProfile");
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserProfile").child(firebaseAuth.getCurrentUser().getUid());
 
 
-
-       updateProfilePic.setOnClickListener(new View.OnClickListener() {
+        updateProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -86,32 +89,47 @@ public class MyAccoutn extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                name=newUserName.getText().toString();
-                email=newUserEmail.getText().toString();
-                carNumber=newUserCarNumber.getText().toString();
-                carModel=newUserCarModel.getText().toString();
-
-
-                if(name.isEmpty() || email.isEmpty()|| carNumber.isEmpty() ||carModel.isEmpty()){
+                name = newUserName.getText().toString();
+                email = newUserEmail.getText().toString();
+                carNumber = newUserCarNumber.getText().toString();
+                carModel = newUserCarModel.getText().toString();
+                if (name.isEmpty() || email.isEmpty() || carNumber.isEmpty() || carModel.isEmpty()) {
                     newUserName.setError("enter name");
                     newUserEmail.setError("enter email");
                     newUserCarNumber.setError("enter carNumber");
                     newUserCarModel.setError("enter carModel");
-                }
-                else {
-                    databaseReference.child(firebaseAuth.getCurrentUser().getUid()).child("name").setValue(name);
-                    databaseReference.child(firebaseAuth.getCurrentUser().getUid()).child(("email")).setValue(email);
-                    databaseReference.child(firebaseAuth.getCurrentUser().getUid()).child("carNumber").setValue(carNumber);
-                    databaseReference.child(firebaseAuth.getCurrentUser().getUid()).child("carModel").setValue(carModel);
-
+                } else {
+                    databaseReference.child("name").setValue(name);
+                    databaseReference.child(("email")).setValue(email);
+                    databaseReference.child("carNumber").setValue(carNumber);
+                    databaseReference.child("carModel").setValue(carModel);
                 }
             }
-
         });
+
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                   try {
+                       String name = dataSnapshot.child("name").getValue().toString();
+                       String email = dataSnapshot.child("email").getValue().toString();
+                       String carNumber = dataSnapshot.child("carNumber").getValue().toString();
+                       String carModel = dataSnapshot.child("carModel").getValue().toString();
+                       newUserName.setText(name);
+                       newUserEmail.setText(email);
+                       newUserCarNumber.setText(carNumber);
+                       newUserCarModel.setText(carModel);
+                   }catch (Exception e){
+                       Log.d("MyAccountn","exception"+e);
+                   }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
     }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData() != null){

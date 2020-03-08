@@ -21,6 +21,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -50,8 +51,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE=101;
     Button btnNearstFood,btnNearstHospital,btnNearstParking;
-
-
+    Button btnFreeFood,btnFreeParking,btnFreeHospital;
     TextView txtName,txtEmail;
 
     GoogleMap mGoogleMap;
@@ -95,9 +95,37 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
 
+        mAuth=FirebaseAuth.getInstance();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //location st karne ka code on toolbar
+
+        btnFreeFood=findViewById(R.id.btnFreeFood);
+        btnFreeParking=findViewById(R.id.btnFreeParing);
+        btnFreeHospital=findViewById(R.id.btnFreeHospital);
+
+
+        btnFreeFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,About.class));
+            }
+        });
+
+        btnFreeParking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,About.class));
+            }
+        });
+
+        btnFreeHospital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,About.class));
+            }
+        });
 
 
         btnNearstFood=findViewById(R.id.btnFood);
@@ -147,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
         });
 
-        btnNearstFood.setOnClickListener(new View.OnClickListener() {
+      /*  btnNearstFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,NearstFoodActivity.class));
@@ -166,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,FreeTravelMap.class));
             }
-        });
+        });*/
 
 
 
@@ -238,27 +266,31 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         NavigationView navigationView=findViewById(R.id.navigation_view);
         viewHeader=navigationView.getHeaderView(0);
 
-        mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
+            mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+            firebaseDatabase=FirebaseDatabase.getInstance();
+            databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile");
 
         txtEmail=viewHeader.findViewById(R.id.headeremail);
         txtName=viewHeader.findViewById(R.id.headername);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name=dataSnapshot.child("name").getValue().toString();
-                String email=dataSnapshot.child("email").getValue().toString();
-                txtName.setText(name);
-                txtEmail.setText(email);
-            }
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    try {
+                        String name = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("name").getValue().toString();
+                        String email = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("email").getValue().toString();
+                        txtName.setText(name);
+                        txtEmail.setText(email);
+                    }catch(NullPointerException n){
+                        Log.d("MyAccountn","exception"+n);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
 
-            }
-        });
 
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mNavDrawer,Drawertoolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -328,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         switch (item.getItemId()){
             case R.id.nav_my_account:
             {
-                Toast.makeText(this, "jump", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "jump", Toast.LENGTH_SHORT).show();
                startActivity(new Intent(MainActivity.this, MyAccoutn.class));
                 break;
             }
@@ -346,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
             case R.id.nav_sign_out:
             {
-                mAuth.signOut();
+              mAuth.signOut();
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
 
                 break;
