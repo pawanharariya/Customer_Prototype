@@ -360,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     protected void onStart() {
         super.onStart();
        if(mCurrentUser == null){
-           // sendUserToLogin();
+            sendUserToLogin();
 
         }
     }
