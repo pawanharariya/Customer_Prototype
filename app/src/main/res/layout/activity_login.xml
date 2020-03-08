@@ -22,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp">
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -43,10 +44,11 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:background="?attr/colorControlHighlight"
+            android:background="@drawable/mobilebar"
             android:elevation="5dp"
             android:hint="Mobile Number"
             android:inputType="phone"
+            android:textColorHint="#A1FFFFFF"
             android:paddingLeft="15dp" />
 
         <Button
