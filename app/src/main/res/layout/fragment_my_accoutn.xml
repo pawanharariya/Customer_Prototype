@@ -1,93 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="@drawable/account_wall"
     tools:context=".MyAccoutn">
 
 
+    <Button
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/backicon"
+        android:layout_marginTop="-75dp"
+        android:layout_marginLeft="-170dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Users Profile"
+        android:textSize="28sp"
+
+        android:layout_marginTop="-32.5dp"
+
+        />
 
     <ImageView
         android:id="@+id/ivProfileUpdate"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:src="@drawable/coffee"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="8dp"
+        android:src="@drawable/profile_up"
+        android:layout_marginTop="60dp"
+
        />
 
     <EditText
+        android:layout_marginTop="60dp"
         android:id="@+id/etNameUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_below="@+id/ivProfileUpdate"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Username"
+        android:textColorHint="#A1FFFFFF"
         android:inputType="textPersonName"
         />
 
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/etEmailUpdate"
-        android:layout_width="222dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_below="@+id/etNameUpdate"
         android:ems="10"
+        android:textColorHint="#A1FFFFFF"
         android:hint="Email"
         android:inputType="textEmailAddress"
        />
 
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/etCarNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_below="@+id/etEmailUpdate"
-        android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Car Nūmber"
+        android:textColorHint="#A1FFFFFF"
+        android:hint="Car Number"
         android:inputType="textEmailAddress"
        />
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/etCarModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_below="@+id/etCarNumber"
-        android:layout_marginTop="8dp"
         android:ems="10"
+        android:textColorHint="#A1FFFFFF"
         android:hint="Car Model"
         android:inputType="textEmailAddress"
         />
 
     <Button
+        android:layout_marginTop="50dp"
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_below="@id/etCarModel"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Update"
       />
 
 
 
 
-</RelativeLayout>
+</LinearLayout>
