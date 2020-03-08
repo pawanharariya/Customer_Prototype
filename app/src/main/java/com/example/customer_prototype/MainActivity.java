@@ -21,6 +21,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     Button btnNearstFood,btnNearstHospital,btnNearstParking;
 
     GoogleMap mGoogleMap;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    View viewHeader;
 
 
 
@@ -82,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     TextView textView;
     Location location;
+
+    TextView txtName,txtEmail;
 
 
     @Override
@@ -236,6 +248,42 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         recyclerView1.setAdapter(adapter1);
         //navigation bar ka code
         NavigationView navigationView=findViewById(R.id.navigation_view);
+
+
+        viewHeader=navigationView.getHeaderView(0);
+
+        mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
+
+        txtEmail=viewHeader.findViewById(R.id.headeremail);
+        txtName=viewHeader.findViewById(R.id.headername);
+
+        try {
+               databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    try {
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        txtName.setText(name);
+                        txtEmail.setText(email);
+                    }catch(Exception e){
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+        catch (NullPointerException e){
+            Log.d("datanull","data"+e);
+        }
+
+
 
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mNavDrawer,Drawertoolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
