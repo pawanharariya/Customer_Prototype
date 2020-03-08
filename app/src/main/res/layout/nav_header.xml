@@ -31,7 +31,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#C51162"
         android:textSize="14sp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         />
 
@@ -44,8 +44,8 @@
         android:text="Customer Email"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#C51162"
-        android:textSize="10sp"
-        android:layout_marginLeft="20dp"
+        android:textSize="9sp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
 
         />
