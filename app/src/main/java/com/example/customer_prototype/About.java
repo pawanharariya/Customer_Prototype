@@ -54,7 +54,7 @@ public class About extends AppCompatActivity implements OnMapReadyCallback {
         btnNearstFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(About.this,NearstFoodActivity.class));
+                startActivity(new Intent(About.this,FreeParkingMap.class));
             }
         });
 
@@ -68,7 +68,7 @@ public class About extends AppCompatActivity implements OnMapReadyCallback {
         btnNearstHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(About.this,FreeTravelMap.class));
+                startActivity(new Intent(About.this,FreeParkingMap.class));
             }
         });
 

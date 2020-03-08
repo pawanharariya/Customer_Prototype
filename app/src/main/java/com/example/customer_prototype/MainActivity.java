@@ -109,21 +109,21 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         btnFreeFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,About.class));
+                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
             }
         });
 
         btnFreeParking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,About.class));
+                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
             }
         });
 
         btnFreeHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,About.class));
+                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
             }
         });
 
