@@ -21,12 +21,13 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,32 +36,26 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import technolifestyle.com.imageslider.FlipperLayout;
+
 public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE=101;
     Button btnNearstFood,btnNearstHospital,btnNearstParking;
-    Button btnFreeFood,btnFreeParking,btnFreeHospital;
-    TextView txtName,txtEmail;
 
     GoogleMap mGoogleMap;
 
 
-     FirebaseAuth mAuth;
-     FirebaseUser mCurrentUser;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
 
     private Button mLogoutBtn;
 
@@ -78,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private FusedLocationProviderClient mLocationClient;
 
     DrawerLayout mNavDrawer;
-
+    ViewFlipper viewFlipper;
     private RecyclerView recyclerView,recyclerView1;
     private ArrayList<MainModel> mainModels;
     ArrayList<Order> al1;
@@ -87,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     TextView textView;
     Location location;
-    View viewHeader;
 
 
     @Override
@@ -95,37 +89,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
 
-        mAuth=FirebaseAuth.getInstance();
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //location st karne ka code on toolbar
-
-        btnFreeFood=findViewById(R.id.btnFreeFood);
-        btnFreeParking=findViewById(R.id.btnFreeParing);
-        btnFreeHospital=findViewById(R.id.btnFreeHospital);
-
-
-        btnFreeFood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
-            }
-        });
-
-        btnFreeParking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
-            }
-        });
-
-        btnFreeHospital.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
-            }
-        });
 
 
         btnNearstFood=findViewById(R.id.btnFood);
@@ -175,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
         });
 
-      /*  btnNearstFood.setOnClickListener(new View.OnClickListener() {
+        btnNearstFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,NearstFoodActivity.class));
@@ -194,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,FreeTravelMap.class));
             }
-        });*/
+        });
 
 
 
@@ -208,7 +174,11 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                     new fragment_home()).commit();
         }*/
 
-       // fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+
+
+        // fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
         //fetchLocation();
 
         Toolbar Drawertoolbar=findViewById(R.id.toolbar);
@@ -216,16 +186,19 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         mNavDrawer=findViewById(R.id.drawer_layout);
 
-
         //assign variable
-        recyclerView=findViewById(R.id.recycle_view);
+        viewFlipper=findViewById(R.id.vflipper);
+        //   recyclerView=findViewById(R.id.recycle_view);
         recyclerView1=findViewById(R.id.recycle_view_1);
 
         //create array
-        Integer[] logo={R.drawable.img1,R.drawable.img2,R.drawable.img3
+        int logo[]={R.drawable.img1,R.drawable.img2,R.drawable.img3
                 ,R.drawable.img4,R.drawable.img5};
 
-
+        for(int images: logo)
+        {
+            flipperImages(images);
+        }
 
 
         mainModels=new ArrayList<>();
@@ -233,10 +206,10 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             MainModel model=new MainModel(logo[i]);
             mainModels.add(model);
         }
-        Order oo1=new Order(R.drawable.fab1,"Coffee");
-        Order oo2=new Order(R.drawable.fab1,"Food");
-        Order oo3=new Order(R.drawable.fab1,"Dinner");
-        Order oo4=new Order(R.drawable.fab1,"Coffee");
+        Order oo1=new Order(R.drawable.great,"Great Offer");
+        Order oo2=new Order(R.drawable.combo,"Combo");
+        Order oo3=new Order(R.drawable.newarr,"New Arrival");
+        Order oo4=new Order(R.drawable.healthyf,"Healthy Food");
         Order oo5=new Order(R.drawable.fab1,"Food");
         Order oo6=new Order(R.drawable.fab1,"Dinner");
         al1 = new ArrayList<>();
@@ -246,51 +219,23 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         al1.add(oo4);
         al1.add(oo5);
         al1.add(oo6);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MainActivity.this
-                ,LinearLayoutManager.HORIZONTAL,false);
+        // LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MainActivity.this
+        //   ,LinearLayoutManager.HORIZONTAL,false);
         LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(MainActivity.this
                 ,LinearLayoutManager.HORIZONTAL,false);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //    recyclerView.setLayoutManager(linearLayoutManager);
+        //  recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         recyclerView1.setLayoutManager(linearLayoutManager1);
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
         mainAdapter=new MainAdapter(getApplicationContext(),mainModels);
         adapter1=new OrderAdapter(this,al1);
-        recyclerView.setAdapter(mainAdapter);
+        //  recyclerView.setAdapter(mainAdapter);
         recyclerView1.setAdapter(adapter1);
-
-        //navigation header ka code
+        //navigation bar ka code
         NavigationView navigationView=findViewById(R.id.navigation_view);
-        viewHeader=navigationView.getHeaderView(0);
-
-            mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-            firebaseDatabase=FirebaseDatabase.getInstance();
-            databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile");
-
-        txtEmail=viewHeader.findViewById(R.id.headeremail);
-        txtName=viewHeader.findViewById(R.id.headername);
-
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    try {
-                        String name = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("name").getValue().toString();
-                        String email = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("email").getValue().toString();
-                        txtName.setText(name);
-                        txtEmail.setText(email);
-                    }catch(NullPointerException n){
-                        Log.d("MyAccountn","exception"+n);
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            });
-
 
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mNavDrawer,Drawertoolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -302,6 +247,20 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    public void flipperImages(int image)
+    {
+
+        ImageView imageView=new ImageView(this);
+        imageView.setBackgroundResource(image);
+
+        viewFlipper.addView(imageView);
+        viewFlipper.setFlipInterval(4000);
+        viewFlipper.setAutoStart(true);
+
+        viewFlipper.setInAnimation(this,android.R.anim.slide_in_left);
+        viewFlipper.setOutAnimation(this,android.R.anim.slide_out_right);
     }
 
   /*  private void fetchLocation() {
@@ -360,13 +319,13 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         switch (item.getItemId()){
             case R.id.nav_my_account:
             {
-              //  Toast.makeText(this, "jump", Toast.LENGTH_SHORT).show();
-               startActivity(new Intent(MainActivity.this, MyAccoutn.class));
+                Toast.makeText(this, "jump", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, MyAccoutn.class));
                 break;
             }
             case R.id.nav_help_and_support:
             {
-               startActivity(new Intent(MainActivity.this,HelpAndSupport.class));
+                startActivity(new Intent(MainActivity.this,HelpAndSupport.class));
 
                 break;
             }
@@ -378,14 +337,14 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
             case R.id.nav_sign_out:
             {
-              mAuth.signOut();
+                mAuth.signOut();
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
 
                 break;
             }
             case R.id.nav_payment:
             {
-               // mAuth.signOut();
+                // mAuth.signOut();
                 startActivity(new Intent(MainActivity.this,PayMent.class));
 
                 break;
@@ -397,22 +356,22 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
 
 
-    @Override
-    protected void onStart() {
+    // @Override
+    /*protected void onStart() {
         super.onStart();
-        if(mCurrentUser == null){
-            sendUserToLogin();
+       if(mCurrentUser == null){
+           // sendUserToLogin();
 
         }
-    }
+    }*/
 
-    private void sendUserToLogin() {
+   /* private void sendUserToLogin() {
         Intent loginIntent = new Intent(MainActivity.this,LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
-    }
+    }*/
 
    /* private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

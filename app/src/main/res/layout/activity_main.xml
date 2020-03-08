@@ -16,67 +16,75 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         >
-
         <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/recycle_layout1"
-        android:layout_marginTop="15dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_view"
-                android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="70dp">
+            <ImageView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:id="@+id/imagebanner"
+                android:scaleType="fitXY"
+                android:src="@drawable/banner"></ImageView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:id="@+id/recycle_layout1"
+            android:layout_marginTop="15dp">
+
+            <ViewFlipper
+                android:id="@+id/vflipper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="160dp"
+                ></ViewFlipper>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="2dp"
+                app:itemBackground="@color/colorPrimary"
+                app:itemIconTint="@drawable/selector"
+                app:itemTextColor="@drawable/selector"
+                app:menu="@menu/menu_navigation">
+
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="410dp">
 
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottomNavigation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginBottom="2dp"
-                    app:itemBackground="@color/colorPrimary"
-                    app:itemIconTint="@drawable/selector"
-                    app:itemTextColor="@drawable/selector"
-                    app:menu="@menu/menu_navigation">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_view_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="195dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="8dp"
+                    >
 
-                </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="320dp">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycle_view_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="195dp"
-
-                        android:paddingLeft="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingRight="16dp"
-                        android:paddingBottom="8dp"></androidx.recyclerview.widget.RecyclerView>
-                </RelativeLayout>
-
+                </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/linearLayoutForButton"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:background="@drawable/button_border"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
 
@@ -86,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text=" Free Food"
                 android:background="@drawable/button_border"
-                android:id="@+id/btnFreeFood"
+                android:id="@+id/btnFood"
                 android:textSize="12sp"
                 android:layout_marginStart="20dp"
                 />
@@ -95,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Free Parking"
-                android:id="@+id/btnFreeParing"
+                android:id="@+id/btnParing"
                 android:background="@drawable/button_border"
                 android:layout_gravity="center"
                 android:textSize="12sp"
@@ -104,9 +112,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Free Hospital"
+                android:text="Free ospial"
                 android:background="@drawable/button_border"
-                android:id="@+id/btnFreeHospital"
+                android:id="@+id/btnHospital"
                 android:layout_gravity="center"
                 android:textSize="12sp"
                 android:layout_marginStart="31dp"
