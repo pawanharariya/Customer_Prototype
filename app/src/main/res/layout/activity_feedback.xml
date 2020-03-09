@@ -8,12 +8,13 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/account_wall"
-    tools:context=".Feedback">
+    tools:context=".Feedback"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="5dp"
         >
 
         <Button
@@ -36,7 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 
         <EditText
             android:layout_width="match_parent"
@@ -50,7 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:id="@+id/feedback"
-            android:layout_gravity="center"
             android:ems="15"
             android:textColorHint="#A1FFFFFF"
             android:hint="Feedback"/>
