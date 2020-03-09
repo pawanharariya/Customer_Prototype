@@ -34,6 +34,11 @@
                 android:icon="@drawable/ic_share"
                 android:title="Terms and Condition" />
             <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_share"
+                android:title="Feedback" />
+
+            <item
                 android:id="@+id/nav_sign_out"
                 android:icon="@drawable/ic_send"
                 android:title="Sign Out" />

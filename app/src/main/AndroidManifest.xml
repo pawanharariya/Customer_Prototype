@@ -36,6 +36,7 @@
         <activity android:name=".MyAccountUser"></activity>
         <activity android:name=".HistoryActivity" />
         <activity android:name=".HelpAndSupport" />
+        <activity android:name=".Feedback" />
         <activity android:name=".ScannerActivity" />
         <activity android:name=".MyAccoutn"></activity>
         <activity android:name=".Home" />

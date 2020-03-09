@@ -386,6 +386,11 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
                 break;
             }
+            case R.id.nav_feedback:
+            {
+                startActivity(new Intent(MainActivity.this,Feedback.class));
+                break;
+            }
             case R.id.nav_sign_out:
             {
                 mAuth.signOut();
