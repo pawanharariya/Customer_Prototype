@@ -47,6 +47,7 @@
             android:id="@+id/username"
             android:layout_marginTop="-50dp"
             android:layout_gravity="center"
+            android:textColor="#FFF"
             android:textColorHint="#A1FFFFFF"
             android:hint="Username"/>
         <EditText
@@ -54,6 +55,7 @@
             android:layout_height="150dp"
             android:id="@+id/feedback"
             android:ems="15"
+            android:textColor="#FFF"
             android:textColorHint="#A1FFFFFF"
             android:hint="Feedback"/>
         <Button
