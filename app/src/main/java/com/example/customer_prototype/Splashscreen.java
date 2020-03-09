@@ -24,7 +24,6 @@ public class Splashscreen extends AppCompatActivity {
         new MyThread().start();
 
 
-
         new MyThread().start();
     }
 
