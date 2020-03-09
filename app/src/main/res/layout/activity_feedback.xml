@@ -10,31 +10,63 @@
     android:background="@drawable/account_wall"
     tools:context=".Feedback">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/username"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:textColorHint="#A1FFFFFF"
-        android:hint="Username"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/feedback"
-        android:layout_gravity="center"
-        android:ems="15"
-        android:textColorHint="#A1FFFFFF"
-        android:hint="Feedback"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnfeed"
-        android:layout_gravity="center"
-        android:text="Send Feedback"
-        android:textColor="#FFF"
-        android:background="@drawable/loginbar"
-        android:onClick="feedbacksent"/>
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        >
 
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:background="@drawable/backicon"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:textSize="30sp"
+            android:textColorHint="#A1FFFFFF"
+            android:textAlignment="center"
+            android:hint="Feedback" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/username"
+            android:layout_marginTop="-50dp"
+            android:layout_gravity="center"
+            android:textColorHint="#A1FFFFFF"
+            android:hint="Username"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/feedback"
+            android:layout_gravity="center"
+            android:ems="15"
+            android:textColorHint="#A1FFFFFF"
+            android:hint="Feedback"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnfeed"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:text="Send Feedback"
+            android:textColor="#FFF"
+            android:background="@drawable/loginbar"
+            android:onClick="feedbacksent"/>
+
+
+
+    </LinearLayout>
 
 </LinearLayout>
