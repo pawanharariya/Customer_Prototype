@@ -18,7 +18,7 @@
             android:title="Help and Support" />
         <item
             android:id="@+id/nav_FAQs"
-            android:icon="@drawable/ic_share"
+            android:icon="@drawable/ic_poll_black_24dp"
             android:title="FAQs" />
 
         <item

@@ -37,6 +37,7 @@ public class Feedback extends Activity {
         ref.child(auth.getCurrentUser().getPhoneNumber()).child("id").setValue(auth.getCurrentUser().getUid());
         ref.child(auth.getCurrentUser().getPhoneNumber()).child("Username").setValue(username.getText().toString());
         ref.child(auth.getCurrentUser().getPhoneNumber()).child("feedback").setValue(feedback.getText().toString());
+        finish();
 
     }
 }
