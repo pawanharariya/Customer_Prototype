@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private static final int REQUEST_CODE=101;
     Button btnNearstFood,btnNearstHospital,btnNearstParking;
 
+
     GoogleMap mGoogleMap;
 
     FirebaseDatabase firebaseDatabase;
@@ -252,15 +253,17 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         viewHeader=navigationView.getHeaderView(0);
 
-        mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
+
         firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
 
         txtEmail=viewHeader.findViewById(R.id.headeremail);
         txtName=viewHeader.findViewById(R.id.headername);
 
         try {
-               databaseReference.addValueEventListener(new ValueEventListener() {
+            mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
+            databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
+
+            databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     try {

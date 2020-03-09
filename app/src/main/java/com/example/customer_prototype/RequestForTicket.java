@@ -99,35 +99,26 @@ public class RequestForTicket extends AppCompatActivity {
 
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String details=etDetails.getText().toString();
                 //member.setDetails(details);
                 // member.setIssue(spinner.getSelectedItem().toString());
-
                 String key=reference.push().getKey();
                 String s="open";
-
                 reference.child(firebaseAuth.getCurrentUser().getUid()).child("MC"+String.valueOf(userId)).child("Details").setValue(details);
                 reference.child(firebaseAuth.getCurrentUser().getUid()).child("MC"+String.valueOf(userId)).child("Issue").setValue(spinner.getSelectedItem().toString());
                 reference.child(firebaseAuth.getCurrentUser().getUid()).child("MC"+String.valueOf(userId)).child("status").setValue(s);
-
                 //reference.child("MC"+String.valueOf(userId)).child("Details").setValue(details);
                 //reference.child("MC"+String.valueOf(userId)).child("Issue").setValue(spinner.getSelectedItem().toString());
-
                 //reference.child("MC"+String.valueOf(userId)).child("UserID").setValue(firebaseAuth.getCurrentUser().getUid());
-
                 Toast.makeText(RequestForTicket.this, "value Stored Succesfully", Toast.LENGTH_SHORT).show();
-
                 //reference.child("MC"+String.valueOf(userId)).setValue(member);
                 etDetails.setText("");
                 spinner.setSelection(0);
