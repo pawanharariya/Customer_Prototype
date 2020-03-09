@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:id="@+id/cordnaor"
     android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/account_wall"
     tools:context=".Feedback">
 
     <EditText
@@ -13,17 +15,25 @@
         android:layout_height="wrap_content"
         android:id="@+id/username"
         android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColorHint="#A1FFFFFF"
         android:hint="Username"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:id="@+id/feedback"
+        android:layout_gravity="center"
+        android:ems="15"
+        android:textColorHint="#A1FFFFFF"
         android:hint="Feedback"/>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnfeed"
+        android:layout_gravity="center"
         android:text="Send Feedback"
+        android:textColor="#FFF"
+        android:background="@drawable/loginbar"
         android:onClick="feedbacksent"/>
 
 
