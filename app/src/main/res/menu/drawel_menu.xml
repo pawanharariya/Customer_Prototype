@@ -25,6 +25,7 @@
             android:id="@+id/nav_payment"
             android:icon="@drawable/ic_monetization"
             android:title="Payment." />
+
     </group>
 
     <item android:title="Communicate">

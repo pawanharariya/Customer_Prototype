@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             try {
                 String city = hereLocation(location.getLatitude(), location.getLongitude());
                 getSupportActionBar().setTitle(city);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(MainActivity.this, "not Found permission", Toast.LENGTH_SHORT).show();
@@ -282,8 +283,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         txtEmail=viewHeader.findViewById(R.id.headeremail);
         txtName=viewHeader.findViewById(R.id.headername);
 
+        mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
         try {
-            mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
+
             databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
 
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -308,8 +310,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         catch (NullPointerException e){
             Log.d("datanull","data"+e);
         }
-
-
 
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mNavDrawer,Drawertoolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -400,7 +400,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             case R.id.nav_help_and_support:
             {
                 startActivity(new Intent(MainActivity.this,HelpAndSupport.class));
-
                 break;
             }
             case R.id.nav_orders:
@@ -494,8 +493,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                         }
                         return;
                     }
-
-
                 }else{
                     Toast.makeText(this,"Permission not granted !",Toast.LENGTH_SHORT).show();
                 }
@@ -524,7 +521,5 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         }
         return cityname;
     }
-
-
 }
 
