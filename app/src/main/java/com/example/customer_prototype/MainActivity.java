@@ -84,13 +84,14 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private FusedLocationProviderClient mLocationClient;
 
     DrawerLayout mNavDrawer;
-    ViewFlipper viewFlipper;
-    private RecyclerView recyclerView,recyclerView1;
+    // ViewFlipper viewFlipper;
+    private RecyclerView recyclerView,recyclerView1,recyclerView2;
     private ArrayList<MainModel> mainModels;
     ArrayList<Order> al1;
+    ArrayList<Food> al2;
     private MainAdapter mainAdapter;
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>adapter1;
-
+    RecyclerView.Adapter<Foodmenu.FoodViewHolder> adapter2;
     TextView textView;
     Location location;
 
@@ -199,19 +200,21 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         mNavDrawer=findViewById(R.id.drawer_layout);
 
-        //assign variable
-        viewFlipper=findViewById(R.id.vflipper);
-        //   recyclerView=findViewById(R.id.recycle_view);
-        recyclerView1=findViewById(R.id.recycle_view_1);
 
+        //assign variable
+        //viewFlipper=findViewById(R.id.vflipper);
+        recyclerView=findViewById(R.id.recycle);
+        recyclerView1=findViewById(R.id.recycle_view_1);
+        recyclerView2=findViewById(R.id.recycle_view_2);
         //create array
         int logo[]={R.drawable.img1,R.drawable.img2,R.drawable.img3
                 ,R.drawable.img4,R.drawable.img5};
+      /* for(int images: logo)
+       {
+           flipperImages(images);
+       }*/
 
-        for(int images: logo)
-        {
-            flipperImages(images);
-        }
+
 
 
         mainModels=new ArrayList<>();
@@ -219,6 +222,19 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             MainModel model=new MainModel(logo[i]);
             mainModels.add(model);
         }
+        Food f1=new Food(R.drawable.food1,"Chesee Roll");
+        Food f2=new Food(R.drawable.food2,"Spring Roll");
+        Food f3=new Food(R.drawable.food3,"Paneer Roll");
+        Food f4=new Food(R.drawable.food1,"Chesee Roll");
+        Food f5=new Food(R.drawable.food2,"Spring Roll");
+        Food f6=new Food(R.drawable.food3,"Paneer Roll");
+        al2=new ArrayList<>();
+        al2.add(f1);
+        al2.add(f2);
+        al2.add(f3);
+        al2.add(f4);
+        al2.add(f5);
+        al2.add(f6);
         Order oo1=new Order(R.drawable.great,"Great Offer");
         Order oo2=new Order(R.drawable.combo,"Combo");
         Order oo3=new Order(R.drawable.newarr,"New Arrival");
@@ -232,21 +248,28 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         al1.add(oo4);
         al1.add(oo5);
         al1.add(oo6);
-        // LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MainActivity.this
-        //   ,LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MainActivity.this
+                ,LinearLayoutManager.HORIZONTAL,false);
         LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(MainActivity.this
                 ,LinearLayoutManager.HORIZONTAL,false);
-
-        //    recyclerView.setLayoutManager(linearLayoutManager);
-        //  recyclerView.setItemAnimator(new DefaultItemAnimator());
+        LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(MainActivity.this
+                ,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         recyclerView1.setLayoutManager(linearLayoutManager1);
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
+        recyclerView2.setLayoutManager(linearLayoutManager2);
+        recyclerView2.setItemAnimator(new DefaultItemAnimator());
         mainAdapter=new MainAdapter(getApplicationContext(),mainModels);
         adapter1=new OrderAdapter(this,al1);
-        //  recyclerView.setAdapter(mainAdapter);
+        adapter2=new Foodmenu(this,al2);
+
+        recyclerView.setAdapter(mainAdapter);
         recyclerView1.setAdapter(adapter1);
+        recyclerView2.setAdapter(adapter2);
+
         //navigation bar ka code
         NavigationView navigationView=findViewById(R.id.navigation_view);
 
@@ -299,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
 
     }
-
+/*
     public void flipperImages(int image)
     {
 
@@ -312,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         viewFlipper.setInAnimation(this,android.R.anim.slide_in_left);
         viewFlipper.setOutAnimation(this,android.R.anim.slide_out_right);
-    }
+    }*/
 
   /*  private void fetchLocation() {
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
