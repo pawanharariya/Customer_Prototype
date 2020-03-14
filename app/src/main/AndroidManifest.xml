@@ -31,6 +31,8 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".AnotherActivity"
+            android:parentActivityName=".About"></activity>
         <activity android:name=".OrdersActivity" />
         <activity android:name=".RequestForTicket" />
         <activity android:name=".MyAccountUser"></activity>
