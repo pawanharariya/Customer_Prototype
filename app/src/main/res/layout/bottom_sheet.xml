@@ -75,27 +75,6 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:src="@mipmap/restaurant" />
-
-
-            <ImageButton
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@mipmap/school"
-                 />
-
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:src="@mipmap/hospital" />
 
             <Button
                 android:layout_width="wrap_content"

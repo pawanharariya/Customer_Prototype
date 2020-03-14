@@ -20,6 +20,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -66,6 +68,9 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE=101;
     GoogleMap mGoogleMap;
+//    ImageButton school=findViewById(R.id.school_nearby);
+
+    ImageButton school,hospital,restraunt;
 
 
     Button btnNearstFood,btnNearstHospital,btnNearstParking;
@@ -106,10 +111,71 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
 
         btnsort=findViewById(R.id.btnSort);
 
+        school=findViewById(R.id.school_nearby);
+        hospital=findViewById(R.id.hospital_nearby);
+        restraunt=findViewById(R.id.restraunt_nearby);
+
         //now create a model class;
         //now create MyHolder class;
         //now create Adapte class;
         //now in the main class
+
+        school.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String hospital="hospital", school="shop",restaurant="restaurant";
+
+                String url;
+                Object transferData[]=new Object[2];
+                GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
+                mMap.clear();
+                url = getUrl(latitude, longitude, school);
+                transferData[0] = mMap;
+                transferData[1] = url;
+
+                getNearbyPlaces.execute(transferData);
+              //  Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(About.this, "location show", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        hospital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String hospital="hospital", school="shop",restaurant="restaurant";
+                GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
+                String url;
+                Object transferData[]=new Object[2];
+                mMap.clear();
+                url = getUrl(latitude, longitude, hospital);
+                transferData[0] = mMap;
+                transferData[1] = url;
+
+                getNearbyPlaces.execute(transferData);
+               // Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(About.this, "location show", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        restraunt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String hospital="hospital", school="shop",restaurant="restaurant";
+                GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
+                String url;
+                Object transferData[]=new Object[2];
+
+                mMap.clear();
+                url=getUrl(latitude,longitude,restaurant);
+                transferData[0]=mMap;
+                transferData[1]=url;
+
+                getNearbyPlaces.execute(transferData);
+               // Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(About.this, "locatio show", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mRecyclerView=findViewById(R.id.recyclerView);
         preferences=this.getSharedPreferences("My_Pref",MODE_PRIVATE);
@@ -319,9 +385,9 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
 
         switch (v.getId()){
-            case R.id.search_address:
+            /*case R.id.search_address:
                 EditText addressField=findViewById(R.id.location_search);
-                String  address=addressField.getText().toString();
+                String address=addressField.getText().toString();
 
                 List<Address> addressList=null;
                 MarkerOptions useRMarkerOptions=new MarkerOptions();
@@ -354,9 +420,10 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
                 else {
                     Toast.makeText(this, "Please write any location name...", Toast.LENGTH_SHORT).show();
                 }
-                break;
+                break;*/
 
             case R.id.hospital_nearby:
+                Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
                 mMap.clear();
                 String url=getUrl(latitude,longitude,hospital);
                 transferData[0]=mMap;
@@ -390,9 +457,8 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
                 Toast.makeText(this, "Searching near by restarunt", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing near by restarunt", Toast.LENGTH_SHORT).show();
                 break;
-
-
         }
+
     }
 
     private String getUrl(double latitude, double longitude, String nearbyPlace) {

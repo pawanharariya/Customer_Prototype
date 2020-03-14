@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,8 +41,12 @@ public class AnotherActivity extends AppCompatActivity {
 
         Bitmap bitmap= BitmapFactory.decodeByteArray(mBytes,0,mBytes.length);
 
-      //  actionBar.setTitle(mTitle);//which title we get previous activity that will set in our action bar
-
+        try {
+            actionBar.setTitle(mTitle);//which title we get previous activity that will set in our action bar
+        }
+        catch(NullPointerException n){
+            Log.d("dikkat", "onCreate: "+n);
+        }
         //now set our data in our view wgich we get in our previous activity
 
         mTitleTv.setText(mTitle);
