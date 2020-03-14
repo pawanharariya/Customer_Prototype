@@ -34,7 +34,7 @@ public class Splashscreen extends AppCompatActivity {
         {
             super.run();
             try {
-                Thread.sleep(7000);
+                Thread.sleep(3000);
                 Intent in=new Intent(Splashscreen.this, MainActivity.class);
                 startActivity(in);
                 finish();
