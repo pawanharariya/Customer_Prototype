@@ -30,7 +30,7 @@
                         android:id="@+id/foodname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
+                        android:fontFamily="@font/open_sans_bold"
                         android:text="Cheese Roll"
                         android:textColor="#fdb501"
                         android:textSize="24dp" />
@@ -89,7 +89,7 @@
                                 android:layout_width="wrap_content"
                                 android:textSize="20dp"
                                 android:textColor="#6A90B5"
-                                android:fontFamily="@font/roboto_bold"
+                                android:fontFamily="@font/open_sans_bold"
                                 android:layout_height="wrap_content"
                                 android:text="20" />
 
@@ -98,7 +98,7 @@
                                 android:layout_width="wrap_content"
                                 android:textSize="14dp"
                                 android:textColor="#DF6A90B5"
-                                android:fontFamily="@font/roboto_regular"
+                                android:fontFamily="@font/open_sans_bold"
                                 android:layout_height="wrap_content"
                                 android:text="Minute" />
                         </LinearLayout>
@@ -120,7 +120,7 @@
                                 android:layout_width="wrap_content"
                                 android:textSize="20dp"
                                 android:textColor="#6A90B5"
-                                android:fontFamily="@font/roboto_bold"
+                                android:fontFamily="@font/open_sans_bold"
                                 android:layout_height="wrap_content"
                                 android:text="15" />
 
@@ -129,7 +129,7 @@
                                 android:layout_width="wrap_content"
                                 android:textSize="14dp"
                                 android:textColor="#EE6A90B5"
-                                android:fontFamily="@font/roboto_regular"
+                                android:fontFamily="@font/open_sans_bold"
                                 android:layout_height="wrap_content"
                                 android:text="Nutritions" />
                         </LinearLayout>
@@ -178,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:text="320 Likes"
                         android:layout_marginLeft="5dp"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/open_sans_bold"
                         android:textColor="#F06A90B5"
                         android:layout_height="wrap_content" />
 
@@ -202,7 +202,7 @@
                         android:layout_width="wrap_content"
                         android:text="14 Comments"
                         android:layout_marginLeft="5dp"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/open_sans_bold"
                         android:textColor="#F06A90B5"
                         android:layout_height="wrap_content" />
 
@@ -226,7 +226,7 @@
                         android:layout_width="wrap_content"
                         android:text="Share"
                         android:layout_marginLeft="5dp"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/open_sans_bold"
                         android:textColor="#F06A90B5"
                         android:layout_height="wrap_content" />
 
