@@ -37,6 +37,7 @@
         <activity android:name=".RequestForTicket" />
         <activity android:name=".MyAccountUser"></activity>
         <activity android:name=".HistoryActivity" />
+        <activity android:name=".FetchActivity" />
         <activity android:name=".HelpAndSupport" />
         <activity android:name=".Feedback" />
         <activity android:name=".ScannerActivity" />
