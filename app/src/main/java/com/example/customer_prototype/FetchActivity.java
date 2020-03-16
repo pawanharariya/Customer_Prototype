@@ -65,8 +65,6 @@ public class FetchActivity extends Activity {
                     etlatitude.setText(latitude);
                     etlongitude.setText(longitude);
 
-
-
                 }catch (Exception e){
                     Log.d("FetchActivity","exception"+e);
                 }

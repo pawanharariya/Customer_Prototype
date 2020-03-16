@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     Context context;
     ArrayList<Order> al;
+
     public UserAdapter(Context context, ArrayList<Order>al){
         this.context = context;
         this.al = al;

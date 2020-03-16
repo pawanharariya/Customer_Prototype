@@ -14,42 +14,71 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:id="@+id/imageIv"
-            android:src="@drawable/ic_launcher_background"></ImageView>
-
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/titleTv"
-            android:text="Title"
+            android:id="@+id/latitude"
+            android:text="Latitude:"
             android:textSize="22sp"
             android:textColor="#000"
             android:textStyle="bold"
-            android:layout_toRightOf="@+id/imageIv"
-            android:layout_toEndOf="@id/imageIv"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"></TextView>
+            ></TextView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/descriptionTv"
-            android:text="Description"
-            android:textSize="18sp"
-            android:textColor="#a9a9a9"
+            android:id="@+id/longitude"
+            android:text="Longitude:"
+            android:textSize="22sp"
+            android:textColor="#000"
             android:textStyle="bold"
-            android:layout_toRightOf="@+id/imageIv"
-            android:layout_toEndOf="@id/imageIv"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/titleTv"></TextView>
+            android:layout_below="@+id/latitude">
+        </TextView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:text="Name:"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_below="@+id/longitude">
+        </TextView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/shopname"
+            android:text="ShopName::"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_below="@+id/name">
+        </TextView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:text="Email:"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_below="@+id/shopname">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/genre"
+            android:text="Genre:"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_below="@+id/email">
+        </TextView>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

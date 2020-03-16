@@ -41,6 +41,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,6 +54,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,6 +109,11 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
 
     RecyclerView mRecyclerView;
     MyAdapter myAdapter;
+    ArrayList<ShowDataOnMap> showDataOnMapList;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
 
 
     @Override
@@ -110,6 +122,8 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         setContentView(R.layout.activity_about);
 
         btnsort=findViewById(R.id.btnSort);
+
+        showDataOnMapList=new ArrayList<>();
 
         school=findViewById(R.id.school_nearby);
         hospital=findViewById(R.id.hospital_nearby);
@@ -178,12 +192,11 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         });
 
         mRecyclerView=findViewById(R.id.recyclerView);
-        preferences=this.getSharedPreferences("My_Pref",MODE_PRIVATE);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager((this)));
+       // preferences=this.getSharedPreferences("My_Pref",MODE_PRIVATE);
 
         getMyList();
-
-
-
         init();
 
 
@@ -216,8 +229,6 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
             }
         });
 
-
-
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             checkUserLocationPermission();
         }
@@ -226,12 +237,12 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        btnsort.setOnClickListener(new View.OnClickListener() {
+        /*btnsort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sortDialog();
             }
-        });
+        });*/
 
 
      /*   btnNearstFood=findViewById(R.id.btnFood);
@@ -298,9 +309,32 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     //phale// private ArrayList<Model> getMyList() {
 
     private void getMyList() {
-        ArrayList<Model> models=new ArrayList<>();
+        ArrayList<ShowDataOnMap> showDataOnMaps=new ArrayList<>();
 
-        Model model=new Model();
+      FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/");
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                        ShowDataOnMap showDataOnMap=snapshot.getValue(ShowDataOnMap.class);
+                        showDataOnMapList.add(showDataOnMap);
+                    }
+
+                    myAdapter=new MyAdapter(About.this,showDataOnMapList);
+                    mRecyclerView.setAdapter(myAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /*Model model=new Model();
         model.setTitle("Clothes Shop");
         model.setDescription("This is a CLothes shop here you can buy cothes");
         model.setImg(R.drawable.clothes);
@@ -328,27 +362,27 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         model.setTitle("mall");
         model.setDescription("This is Mall here you can you can get all tings");
         model.setImg(R.drawable.mall);
-        models.add(model);
+        models.add(model);*/
 
         //phale return models;
 
-        String mSortSetting =preferences.getString("Sort","ascending");
+       // String mSortSetting =preferences.getString("Sort","ascending");
 
-        if(mSortSetting.equals("ascending")){
-            Collections.sort(models,Model.By_TITLE_ASCENDING);
-        }
-        else if(mSortSetting.equals("descending")){
-            Collections.sort(models,Model.By_TITLE_DESCENDINgG);
-        }
+        //if(mSortSetting.equals("ascending")){
+            //Collections.sort(models,Model.By_TITLE_ASCENDING);
+        //}
+        //else if(mSortSetting.equals("descending")){
+          //  Collections.sort(models,Model.By_TITLE_DESCENDINgG);
+        //}
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//i will create recycleviw in linerarlayout
-        myAdapter=new MyAdapter(this,models);
+        myAdapter=new MyAdapter(this,showDataOnMaps);
         mRecyclerView.setAdapter(myAdapter);
 
 
     }
 
-    private void sortDialog() {
+    /*private void sortDialog() {
         String[] options ={"Ascending" ,"Descending"};
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
 
@@ -374,7 +408,7 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
             }
         });
         builder.create().show();
-    }
+    }*/
 
 
     public void onClick(View v){
@@ -559,17 +593,16 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
 
         currentUserLocationMarker=mMap.addMarker(markerOptions);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        CameraUpdate cameraUpdateFactory=CameraUpdateFactory.newLatLngZoom(latLng,14);
+        mMap.moveCamera(cameraUpdateFactory);
+       // mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
 
         if(googleApiClient!=null){
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient,this);
         }
 
     }
-
-
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -661,15 +694,11 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
                };
            }*/
 
-   /* private int getRandom() {
+            /* private int getRandom() {
         return (int) Math.floor(Math.random() * 100);
     }*/
 
-
-
-
-
-  /*  private void fetchLocation() {
+     /*  private void fetchLocation() {
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
             return;
