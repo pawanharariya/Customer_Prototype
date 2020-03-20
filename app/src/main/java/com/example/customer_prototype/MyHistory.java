@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-class MyHistory extends RecyclerView.ViewHolder implements View.OnClickListener{
+class MyHistory extends RecyclerView.ViewHolder {
 
     ItemClickListner itemClickListner;
 
@@ -21,11 +21,11 @@ class MyHistory extends RecyclerView.ViewHolder implements View.OnClickListener{
         this.statusHistorty=itemView.findViewById(R.id.status);
         this.id=itemView.findViewById(R.id.id);
 
-        itemView.setOnClickListener(this);
+       // itemView.setOnClickListener(this);
     }
 
-    @Override
+   /* @Override
     public void onClick(View view) {
         this.itemClickListner.onItemClickListner(view,getLayoutPosition());
-    }
+    }*/
 }
