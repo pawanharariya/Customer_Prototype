@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listview"></ListView>
+        android:id="@+id/recy"></androidx.recyclerview.widget.RecyclerView>
 
 
 

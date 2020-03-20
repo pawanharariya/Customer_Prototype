@@ -311,7 +311,7 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     private void getMyList() {
         ArrayList<ShowDataOnMap> showDataOnMaps=new ArrayList<>();
 
-      FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/");
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
