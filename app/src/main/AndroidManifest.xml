@@ -40,6 +40,7 @@
         <activity android:name=".FetchActivity" />
         <activity android:name=".HelpAndSupport" />
         <activity android:name=".Feedback" />
+        <activity android:name=".Order_Activity"></activity>
         <activity android:name=".ScannerActivity" />
         <activity android:name=".MyAccoutn"></activity>
         <activity android:name=".Home" />

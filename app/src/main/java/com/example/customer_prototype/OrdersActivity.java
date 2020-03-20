@@ -1,42 +1,42 @@
 package com.example.customer_prototype;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdersActivity extends AppCompatActivity {
-    ArrayList<Order> al;
-    RecyclerView rv;
-    RecyclerView.Adapter<UserAdapter.UserViewHolder>adapter;
-    RecyclerView.LayoutManager layoutManager;
+    List<Orders> lstOrder ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
 
-        Order o1=new Order(R.drawable.cccd,30,"Coffee");
-        Order o2=new Order(R.drawable.ss,90,"Food");
-        Order o3=new Order(R.drawable.s1,120,"Dinner");
-        Order o4=new Order(R.drawable.cccd,30,"Coffee");
-        Order o5=new Order(R.drawable.ss,90,"Food");
-        Order o6=new Order(R.drawable.s1,120,"Dinner");
-        al = new ArrayList<>();
-        al.add(o1);
-        al.add(o2);
-        al.add(o3);
-        al.add(o4);
-        al.add(o5);
-        al.add(o6);
-        rv = findViewById(R.id.recycle_order);
-        layoutManager = new LinearLayoutManager(this);
-        rv.setLayoutManager(layoutManager);
-        adapter = new UserAdapter(this,al);
-        rv.setAdapter(adapter);
-        rv.setItemAnimator(new DefaultItemAnimator());
+        lstOrder = new ArrayList<>();
+        lstOrder.add(new Orders("The Vegitarian","Categorie Book","Description book",R.drawable.thevigitarian));
+        lstOrder.add(new Orders("The Wild Robot","Categorie Book","Description book",R.drawable.thewildrobot));
+        lstOrder.add(new Orders("Maria Semples","Categorie Book","Description book",R.drawable.mariasemples));
+        lstOrder.add(new Orders("The Martian","Categorie Book","Description book",R.drawable.themartian));
+        lstOrder.add(new Orders("He Died with...","Categorie Book","Description book",R.drawable.hediedwith));
+        lstOrder.add(new Orders("The Vegitarian","Categorie Book","Description book",R.drawable.thevigitarian));
+        lstOrder.add(new Orders("The Wild Robot","Categorie Book","Description book",R.drawable.thewildrobot));
+        lstOrder.add(new Orders("Maria Semples","Categorie Book","Description book",R.drawable.mariasemples));
+        lstOrder.add(new Orders("The Martian","Categorie Book","Description book",R.drawable.themartian));
+        lstOrder.add(new Orders("He Died with...","Categorie Book","Description book",R.drawable.hediedwith));
+        lstOrder.add(new Orders("The Vegitarian","Categorie Book","Description book",R.drawable.thevigitarian));
+        lstOrder.add(new Orders("The Wild Robot","Categorie Book","Description book",R.drawable.thewildrobot));
+        lstOrder.add(new Orders("Maria Semples","Categorie Book","Description book",R.drawable.mariasemples));
+        lstOrder.add(new Orders("The Martian","Categorie Book","Description book",R.drawable.themartian));
+        lstOrder.add(new Orders("He Died with...","Categorie Book","Description book",R.drawable.hediedwith));
+
+        RecyclerView myrv =  findViewById(R.id.recyclerview_id);
+        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this,lstOrder);
+        myrv.setLayoutManager(new GridLayoutManager(this,3));
+        myrv.setAdapter(myAdapter);
+
     }
 }
