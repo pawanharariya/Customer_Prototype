@@ -404,7 +404,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
             case R.id.nav_orders:
             {
-                startActivity(new Intent(MainActivity.this,OrdersActivity.class));
+                startActivity(new Intent(MainActivity.this,Order_Display_Activity.class));
 
                 break;
             }
@@ -423,7 +423,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             case R.id.nav_payment:
             {
                 // mAuth.signOut();
-                startActivity(new Intent(MainActivity.this,FetchActivity.class));
+                startActivity(new Intent(MainActivity.this,PayMent.class));
 
                 break;
             }

@@ -42,6 +42,10 @@
         <activity android:name=".FetchActivity" />
         <activity android:name=".HelpAndSupport" />
         <activity android:name=".Feedback" />
+        <activity android:name=".Order_Information_Activity"
+            android:theme="@style/AppTheme.PopMe">
+        </activity>
+        <activity android:name=".Order_Display_Activity" />
         <activity android:name=".Order_Activity"></activity>
         <activity android:name=".ScannerActivity" />
         <activity android:name=".MyAccoutn" />
