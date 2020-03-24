@@ -10,6 +10,8 @@ import android.widget.TextView;
 public class Order_Information_Activity extends Activity {
 
     TextView shop_id,date_id,status_id,order_id;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class Order_Information_Activity extends Activity {
         date_id.setText("Date : "+date);
         status_id.setText("Status : "+status);
         order_id.setText("Order ID : "+order);
+
+
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

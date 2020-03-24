@@ -57,13 +57,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
                 String latitudeUser=String.valueOf(showDataOnMaps.get(position).getLatitude());//these object get our data from previos activity
                 String longitudeUser=String.valueOf(showDataOnMaps.get(position).getLongitude());//same upper
-
-                Log.d("latitude","lat"+latitudeUser);
-                Log.d("longitude","lag"+longitudeUser);
                 String  nameUser=showDataOnMaps.get(position).getName();
                 String  shopNameUser=showDataOnMaps.get(position).getShopName();
                 String  emailUser=showDataOnMaps.get(position).getEmail();
                 String  genreUser=showDataOnMaps.get(position).getGenre();
+
+                /* Log.d("latitude","lat"+latitudeUser);
+                Log.d("longitude","lag"+longitudeUser);*/
 
                 //BitmapDrawable bitmapDrawable=(BitmapDrawable)holder.mImageView.getDrawable();//this will get our image from drawable
 

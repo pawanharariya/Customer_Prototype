@@ -17,14 +17,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@drawable/back"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="52dp"
+           android:background="@drawable/back"
+           android:orientation="horizontal"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent">
+
+           <Button
+               android:id="@+id/btn_active_order"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Active"
+               android:background="@drawable/active_btton_oeder"></Button>
+
+           <Button
+               android:id="@+id/btn_cancel_order"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Cancel"
+
+               android:layout_marginLeft="70dp"
+               android:background="@drawable/active_btton_oeder"></Button>
+
+           <Button
+               android:id="@+id/btn_history_order"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="History"
+               android:layout_marginLeft="70dp"
+               android:background="@drawable/active_btton_oeder"></Button>
+
+
+       </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Recyclerview"
