@@ -15,28 +15,27 @@ public class Feedback extends Activity {
     private FirebaseAuth auth;
     private DatabaseReference ref;
 
-    private EditText feedback,username;
+    private EditText message,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
-        username= (EditText) findViewById(R.id.username);
-        feedback= (EditText) findViewById(R.id.feedback);
+        email= (EditText) findViewById(R.id.email);
+        message= (EditText) findViewById(R.id.message);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
         auth=FirebaseAuth.getInstance();
-
 
     }
 
     public void feedbacksent(View view) {
 
 
-        ref.child(auth.getCurrentUser().getPhoneNumber()).child("id").setValue(auth.getCurrentUser().getUid());
-        ref.child(auth.getCurrentUser().getPhoneNumber()).child("Username").setValue(username.getText().toString());
-        ref.child(auth.getCurrentUser().getPhoneNumber()).child("feedback").setValue(feedback.getText().toString());
+        ref.child("Feedback").child(auth.getCurrentUser().getUid()).child("phone").setValue(auth.getCurrentUser().getPhoneNumber());
+        ref.child("Feedback").child(auth.getCurrentUser().getUid()).child("message").setValue(message.getText().toString());
+        ref.child("Feedback").child(auth.getCurrentUser().getUid()).child("email").setValue(email.getText().toString());
         finish();
 
     }
