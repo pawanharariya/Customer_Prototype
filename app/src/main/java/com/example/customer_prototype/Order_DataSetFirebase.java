@@ -6,6 +6,7 @@ public class Order_DataSetFirebase {
     String date;
     String shop;
 
+
     public String getStatus() {
         return status;
     }

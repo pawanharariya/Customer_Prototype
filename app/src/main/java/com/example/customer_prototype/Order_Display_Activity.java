@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,21 @@ public class Order_Display_Activity extends AppCompatActivity {
     String sta=null,st=null;
 
 
+    final int[] img = {
+            R.drawable.back,
+            R.drawable.back1,
+            R.drawable.back2,
+            R.drawable.back3,
+            R.drawable.back4,
+            R.drawable.back5,
+            R.drawable.back6,
+            R.drawable.back7,
+            R.drawable.back8,
+            R.drawable.back9
+    };
+
+
+
     @Override
     protected void onStart() {
         firebaseRecyclerAdapter.startListening();
@@ -65,47 +81,60 @@ public class Order_Display_Activity extends AppCompatActivity {
         options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
 
 
-       // btnActive=findViewById(R.id.btn_active_order);
-        //btnCancel=findViewById(R.id.btn_cancel_order);
-        //btnHistory=findViewById(R.id.btn_history_order);
+        btnActive=findViewById(R.id.btn_active_order);
+        btnCancel=findViewById(R.id.btn_cancel_order);
+        btnHistory=findViewById(R.id.btn_history_order);
 
-       /* btnActive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                valueOrder="active";
+        btnCancel.setOnClickListener(new Click());
+        btnActive.setOnClickListener(new Click());
+        btnHistory.setOnClickListener(new Click());
+
+            card();
+    }
+    public class Click implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+
+                case R.id.btn_active_order:
+                   // intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    databaseReference = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("active");
+                    databaseReference.keepSynced(true);
+                    options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
+                    card();
+                    firebaseRecyclerAdapter.startListening();
+                    break;
+
+                case R.id.btn_cancel_order:
+                    databaseReference = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("cancel");
+                    databaseReference.keepSynced(true);
+                    options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
+                    card();
+                    firebaseRecyclerAdapter.startListening();
+                    break;
+
+                case R.id.btn_history_order:
+                    databaseReference = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("history");
+                    databaseReference.keepSynced(true);
+                    options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
+                    card();
+                    firebaseRecyclerAdapter.startListening();break;
+                default:
 
             }
-        });*/
+        }
+    }
 
-
-        final int[] img = {
-                R.drawable.back,
-                R.drawable.back1,
-                R.drawable.back2,
-                R.drawable.back3,
-                R.drawable.back4,
-                R.drawable.back5,
-                R.drawable.back6,
-                R.drawable.back7,
-                R.drawable.back8,
-                R.drawable.back9
-
-        };
-
-
-
+    void card(){
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Order_DataSetFirebase, Order_DataViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final Order_DataViewHolder holder, int position, @NonNull final Order_DataSetFirebase model) {
                 holder.linearLayout.setBackgroundResource(img[new Random().nextInt(img.length)]);
                 //FirebaseRecyclerView main task where it fetching data from model
-
-
                 holder.shop.setText("Shop : "+model.getShop());
                 holder.date.setText("Date : "+model.getDate());
                 holder.status.setText("Status : "+model.getStatus());
                 holder.orderid.setText("ID : "+model.getOrderid());
-
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -120,8 +149,6 @@ public class Order_Display_Activity extends AppCompatActivity {
                     }
                 });
             }
-
-
 
             @NonNull
             @Override
