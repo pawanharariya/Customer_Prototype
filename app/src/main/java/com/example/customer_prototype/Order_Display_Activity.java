@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,8 +39,6 @@ public class Order_Display_Activity extends AppCompatActivity {
     //initialize these variable
 
     Button btnActive,btnCancel,btnHistory;
-    String sta=null,st=null;
-
 
     final int[] img = {
             R.drawable.back,
@@ -135,6 +134,8 @@ public class Order_Display_Activity extends AppCompatActivity {
                 holder.date.setText("Date : "+model.getDate());
                 holder.status.setText("Status : "+model.getStatus());
                 holder.orderid.setText("ID : "+model.getOrderid());
+                Picasso.get().load(model.getProfile()).into(holder.profile);
+
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -144,6 +145,8 @@ public class Order_Display_Activity extends AppCompatActivity {
                         intent.putExtra("date",model.getDate());
                         intent.putExtra("status",model.getStatus());
                         intent.putExtra("orderid",model.getOrderid());
+                        intent.putExtra("profile",model.getProfile());
+
 
                         startActivity(intent);
                     }

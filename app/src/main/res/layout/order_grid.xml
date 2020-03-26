@@ -21,8 +21,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:src="@drawable/order_icon"/>
+            android:layout_margin="15dp"/>
         <LinearLayout
             android:id="@+id/linear_mid"
             android:layout_width="140dp"

@@ -7,9 +7,14 @@ import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Order_Information_Activity extends Activity {
 
     TextView shop_id,date_id,status_id,order_id;
+    CircleImageView profile_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,16 +24,22 @@ public class Order_Information_Activity extends Activity {
         String date = getIntent().getStringExtra("date");
         String status = getIntent().getStringExtra("status");
         String order = getIntent().getStringExtra("orderid");
+        String profile = getIntent().getStringExtra("profile");
+
 
         shop_id = findViewById(R.id.shop_id);
         order_id = findViewById(R.id.order_id);
         status_id = findViewById(R.id.status_id);
         date_id = findViewById(R.id.date_id);
+        profile_id = findViewById(R.id.imageView);
 
         shop_id.setText("Shop : "+shop);
         date_id.setText("Date : "+date);
         status_id.setText("Status : "+status);
         order_id.setText("Order ID : "+order);
+        Picasso.get().load(profile).into(profile_id);
+
+
 
 
 

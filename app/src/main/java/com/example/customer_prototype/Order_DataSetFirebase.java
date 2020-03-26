@@ -5,8 +5,13 @@ public class Order_DataSetFirebase {
     String orderid;
     String date;
     String shop;
+    String profile;
 
 
+
+    public String getProfile() {
+        return profile;
+    }
     public String getStatus() {
         return status;
     }
@@ -39,11 +44,12 @@ public class Order_DataSetFirebase {
         this.shop = shop;
     }
 
-    public Order_DataSetFirebase(String status, String orderid, String date, String shop) {
+    public Order_DataSetFirebase(String status, String orderid, String date, String shop, String profile) {
         this.status = status;
         this.orderid = orderid;
         this.date = date;
         this.shop = shop;
+        this.profile = profile;
     }
 
 
