@@ -10,8 +10,6 @@ import android.widget.TextView;
 public class Order_Information_Activity extends Activity {
 
     TextView shop_id,date_id,status_id,order_id;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

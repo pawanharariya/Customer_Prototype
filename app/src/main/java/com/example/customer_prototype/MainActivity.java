@@ -8,10 +8,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -42,6 +44,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,6 +59,16 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE=101;
     Button btnNearstFood,btnNearstHospital,btnNearstParking;
+
+
+    private DatabaseReference databaseReference2;
+    StorageReference storageReference;
+    FirebaseDatabase firebaseDatabase2;
+
+    ArrayList<TermModel> termModelArrayList;
+    RecyclerView recyclerView;
+
+    TermAdapter termAdapter;
 
 
     GoogleMap mGoogleMap;
@@ -85,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     DrawerLayout mNavDrawer;
     // ViewFlipper viewFlipper;
-    private RecyclerView recyclerView,recyclerView1,recyclerView2;
+   // private RecyclerView recyclerView,recyclerView1,recyclerView2;
     private ArrayList<MainModel> mainModels;
     ArrayList<Order> al1;
     ArrayList<Food> al2;
@@ -97,20 +111,52 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     TextView txtName,txtEmail;
 
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // progressDialog = new ProgressDialog(MainActivity.this);
+        //progressDialog.setTitle("Loading");
+        //progressDialog.show();
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //location st karne ka code on toolbar
+
+        recyclerView=findViewById(R.id.Recyclerview);
+        termModelArrayList=new ArrayList<>();
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        firebaseDatabase2=FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/");
+        databaseReference2=firebaseDatabase2.getReference();
+
+        storageReference= FirebaseStorage.getInstance().getReference();
+        databaseReference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               // progressDialog.dismiss();
+                for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    TermModel termModel=dataSnapshot1.getValue(TermModel.class);
+                    termModelArrayList.add(termModel);
+                }
+                termAdapter=new TermAdapter(MainActivity.this,termModelArrayList);
+                recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this,3));
+                recyclerView.setAdapter(termAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
 
 
-        btnNearstFood=findViewById(R.id.btnFood);
-        btnNearstHospital=findViewById(R.id.btnHospital);
-        btnNearstParking=findViewById(R.id.btnParing);
+        //btnNearstFood=findViewById(R.id.btnFood);
+        //btnNearstHospital=findViewById(R.id.btnHospital);
+        //btnNearstParking=findViewById(R.id.btnParing);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -156,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
         });
 
-        btnNearstFood.setOnClickListener(new View.OnClickListener() {
+/*        btnNearstFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
@@ -175,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,FreeParkingMap.class));
             }
-        });
+        });*/
 
 
 
@@ -204,12 +250,15 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         //assign variable
         //viewFlipper=findViewById(R.id.vflipper);
-        recyclerView=findViewById(R.id.recycle);
-        recyclerView1=findViewById(R.id.recycle_view_1);
-        recyclerView2=findViewById(R.id.recycle_view_2);
+        //recyclerView=findViewById(R.id.recycle);
+        //recyclerView1=findViewById(R.id.recycle_view_1);
+        //recyclerView2=findViewById(R.id.recycle_view_2);
         //create array
-        int logo[]={R.drawable.img1,R.drawable.img2,R.drawable.img3
-                ,R.drawable.img4,R.drawable.img5};
+
+
+
+       // int logo[]={R.drawable.img1,R.drawable.img2,R.drawable.img3
+         //       ,R.drawable.img4,R.drawable.img5};
       /* for(int images: logo)
        {
            flipperImages(images);
@@ -218,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
 
 
-        mainModels=new ArrayList<>();
+      /*  mainModels=new ArrayList<>();
         for(int i=0;i<logo.length;i++){
             MainModel model=new MainModel(logo[i]);
             mainModels.add(model);
@@ -269,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         recyclerView.setAdapter(mainAdapter);
         recyclerView1.setAdapter(adapter1);
-        recyclerView2.setAdapter(adapter2);
+        recyclerView2.setAdapter(adapter2);*/
 
         //navigation bar ka code
         NavigationView navigationView=findViewById(R.id.navigation_view);
@@ -393,8 +442,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         switch (item.getItemId()){
             case R.id.nav_my_account:
             {
-                Toast.makeText(this, "jump", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, MyAccoutn.class));
+                //Toast.makeText(this, "jump", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, NewActivity.class));
                 break;
             }
             case R.id.nav_help_and_support:
@@ -426,6 +475,10 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 startActivity(new Intent(MainActivity.this,PayMent.class));
 
                 break;
+            }
+            case R.id.nav_term_condition:
+            {
+                startActivity(new Intent(MainActivity.this,TermAndCondition.class));
             }
         }
         mNavDrawer.closeDrawer(GravityCompat.START);

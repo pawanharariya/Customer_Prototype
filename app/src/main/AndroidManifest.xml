@@ -16,7 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HistoryShow"></activity>
+        <activity android:name=".NewActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+        <activity
+            android:name=".DetailsOffer"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity android:name=".TermAndCondition" />
+        <activity android:name=".HistoryShow" />
         <activity android:name=".FreeTravelMap" />
         <activity android:name=".FreeParkingMap" />
         <activity android:name=".NearstFoodActivity" />
@@ -37,23 +45,22 @@
             android:parentActivityName=".About" />
         <activity android:name=".OrdersActivity" />
         <activity android:name=".RequestForTicket" />
-        <activity android:name=".MyAccountUser" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".FetchActivity" />
         <activity android:name=".HelpAndSupport" />
         <activity android:name=".Feedback" />
-        <activity android:name=".Order_Information_Activity"
-            android:theme="@style/AppTheme.PopMe">
-        </activity>
+        <activity
+            android:name=".Order_Information_Activity"
+            android:theme="@style/AppTheme.PopMe" />
         <activity android:name=".Order_Display_Activity" />
-        <activity android:name=".Order_Activity"></activity>
+        <activity android:name=".Order_Activity" />
         <activity android:name=".ScannerActivity" />
-        <activity android:name=".MyAccoutn" />
         <activity android:name=".Home" />
         <activity android:name=".Dashboard" />
         <activity
             android:name=".About"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity android:name=".PayMent" />
         <activity android:name=".RegisterActivity" />
         <activity

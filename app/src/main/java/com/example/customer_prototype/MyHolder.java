@@ -14,9 +14,6 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
 
     TextView latitude,longitude,name,shopname,email,genre;
 
-
-
-
     MyHolder(@NonNull View itemView) {
         super(itemView);
 

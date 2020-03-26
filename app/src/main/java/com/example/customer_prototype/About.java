@@ -2,6 +2,7 @@ package com.example.customer_prototype;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -122,6 +123,10 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         setContentView(R.layout.activity_about);
 
         btnsort=findViewById(R.id.btnSort);
+
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("Stores");
+
 
         showDataOnMapList=new ArrayList<>();
 

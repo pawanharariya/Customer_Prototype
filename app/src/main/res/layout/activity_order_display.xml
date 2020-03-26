@@ -26,29 +26,6 @@
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent">
 
-           <Button
-               android:id="@+id/btn_active_order"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Active"
-               android:background="@drawable/active_btton_oeder"></Button>
-
-           <Button
-               android:id="@+id/btn_cancel_order"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Cancel"
-
-               android:layout_marginLeft="70dp"
-               android:background="@drawable/active_btton_oeder"></Button>
-
-           <Button
-               android:id="@+id/btn_history_order"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="History"
-               android:layout_marginLeft="70dp"
-               android:background="@drawable/active_btton_oeder"></Button>
 
 
        </LinearLayout>

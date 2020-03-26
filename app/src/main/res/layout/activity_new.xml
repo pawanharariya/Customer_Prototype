@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/image5"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:onClick="choseImage"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/amt_icon"
+            android:layout_marginTop="30dp">
+        </ImageView>
+
+        <EditText
+
+            android:id="@+id/etNameUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image5"
+            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:hint="Username"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FF9E80"
+            android:textColor="#EA80FC"
+            android:inputType="textPersonName"
+            />
+
+        <EditText
+            android:layout_marginTop="5dp"
+            android:id="@+id/etEmailUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etNameUpdate"
+            android:textColor="#FF9E80"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:textColorHint="#EA80FC"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            />
+
+        <EditText
+            android:layout_marginTop="5dp"
+            android:id="@+id/etCarNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF9E80"
+            android:layout_below="@+id/etEmailUpdate"
+            android:ems="10"
+
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#EA80FC"
+            android:hint="Car Number"
+            android:inputType="textEmailAddress"
+            />
+        <EditText
+            android:layout_marginTop="5dp"
+            android:id="@+id/etCarModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etCarNumber"
+            android:textColor="#FF9E80"
+            android:ems="10"
+            android:layout_centerHorizontal="true"
+
+            android:textColorHint="#EA80FC"
+            android:hint="Car Model"
+            android:inputType="textEmailAddress"
+            />
+
+        <Button
+            android:layout_marginTop="50dp"
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginbar"
+            android:layout_below="@id/etCarModel"
+            android:layout_centerHorizontal="true"
+            android:text="Update"
+
+            android:textColor="#FF9E80"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

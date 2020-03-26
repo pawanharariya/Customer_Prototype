@@ -65,9 +65,9 @@ public class Order_Display_Activity extends AppCompatActivity {
         options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
 
 
-        btnActive=findViewById(R.id.btn_active_order);
-        btnCancel=findViewById(R.id.btn_cancel_order);
-        btnHistory=findViewById(R.id.btn_history_order);
+       // btnActive=findViewById(R.id.btn_active_order);
+        //btnCancel=findViewById(R.id.btn_cancel_order);
+        //btnHistory=findViewById(R.id.btn_history_order);
 
        /* btnActive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +89,9 @@ public class Order_Display_Activity extends AppCompatActivity {
                 R.drawable.back7,
                 R.drawable.back8,
                 R.drawable.back9
+
         };
+
 
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Order_DataSetFirebase, Order_DataViewHolder>(options) {
@@ -98,117 +100,12 @@ public class Order_Display_Activity extends AppCompatActivity {
                 holder.linearLayout.setBackgroundResource(img[new Random().nextInt(img.length)]);
                 //FirebaseRecyclerView main task where it fetching data from model
 
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot ds1 : dataSnapshot.getChildren()){
-                            String key=ds1.getKey();
-                            // Order_DataSetFirebase order_dataSetFirebase=new Order_DataSetFirebase();
-                            String  st=dataSnapshot.child(key).child("status").getValue().toString();
-                            // Log.d("status","status: "+st);
 
-                            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("value").child("ord");
-                            btnActive.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    reference.child("sta").setValue("active");
-                                }
-                            });
-                            btnCancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    reference.child("sta").setValue("cancel");
-                                }
-                            });
-                            btnHistory.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                    reference.child("sta").setValue("history");
-                                }
-                            });
-
-                            DatabaseReference reference1=FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("value");
-
-                            reference1.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                    for(DataSnapshot h :dataSnapshot.getChildren() ){
-
-
-                                        String sta=dataSnapshot.child("ord").child("sta").getValue().toString();
-                                        // Log.d("acvvhj","acbjhbjh :  "+sta);
-                                        if(sta.equals(st)){
-                                            holder.shop.setText("Shop : "+model.getShop());
-                                            holder.date.setText("Date : "+model.getDate());
-                                            holder.status.setText("Status : "+st);
-                                            holder.orderid.setText("ID : "+model.getOrderid());
-
-                                        }
-                                        else if(sta.equals(st)){
-                                            holder.shop.setText("Shop : "+model.getShop());
-                                            holder.date.setText("Date : "+model.getDate());
-                                            holder.status.setText("Status : "+st);
-                                            holder.orderid.setText("ID : "+model.getOrderid());
-
-                                            Log.d("ac","ac : "+st);
-                                        }
-                                        else if(sta.equals(st)){
-                                            holder.shop.setText("Shop : "+model.getShop());
-                                            holder.date.setText("Date : "+model.getDate());
-                                            holder.status.setText("Status : "+st);
-                                            holder.orderid.setText("ID : "+model.getOrderid());
-
-                                        }
-
-                                    }
-                                    // String sta=dataSnapshot.child("active").getValue().toString();
-                                    //String sta1=dataSnapshot.child("cancel").getValue().toString();
-                                    //String sta2=dataSnapshot.child("history").getValue().toString();
-
-                                    //Log.d("active1","active1: "+sta);
-
-                                    //Log.d("cancel1","cancel1: "+sta1);
-
-                                    //Log.d("history","history: "+sta2);
-
-                                    // Log.d("sss","sss"+st);
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-
-                   /* if(st.equals(valueOrder)){
-                        Log.d("active","active: "+st);
-                    }
-                   // if(st.equals("active")){
-                     //   Log.d("active","active: "+st);
-                    ///}
-                    else if(st.equals("cancel")){
-                        Log.d("cancel","cancel: "+st);
-                    }
-                    else if(st.equals("history")){
-                        Log.d("history","history: "+st);
-                    }*/
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-
-               /* holder.shop.setText("Shop : "+model.getShop());
+                holder.shop.setText("Shop : "+model.getShop());
                 holder.date.setText("Date : "+model.getDate());
                 holder.status.setText("Status : "+model.getStatus());
-                holder.orderid.setText("ID : "+model.getOrderid());*/
+                holder.orderid.setText("ID : "+model.getOrderid());
+
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
