@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,64 +22,36 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.SplittableRandom;
 
 public class Order_Display_Activity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private ArrayList<Order_DataSetFirebase> arrayList;
-
-    private DatabaseReference databaseReference;
-    private FirebaseRecyclerOptions<Order_DataSetFirebase> options;
-    private FirebaseRecyclerAdapter<Order_DataSetFirebase, Order_DataViewHolder> firebaseRecyclerAdapter;
-    //initialize these variable
-
     Button btnActive,btnCancel,btnHistory;
+    private RecyclerView recyclerView;
+    private Order_DataViewHolder adapter;
+    private List<Order_DataSetFirebase> orderDataSetFirebaseList;
 
-    final int[] img = {
-            R.drawable.back,
-            R.drawable.back1,
-            R.drawable.back2,
-            R.drawable.back3,
-            R.drawable.back4,
-            R.drawable.back5,
-            R.drawable.back6,
-            R.drawable.back7,
-            R.drawable.back8,
-            R.drawable.back9
-    };
-
-
-
-    @Override
-    protected void onStart() {
-        firebaseRecyclerAdapter.startListening();
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        firebaseRecyclerAdapter.stopListening();
-        super.onStop();
-    }
+    DatabaseReference dbArtists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_display);
+
         recyclerView = findViewById(R.id.Recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        arrayList = new ArrayList<Order_DataSetFirebase>();
-        databaseReference = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("orders");
-        databaseReference.keepSynced(true);
-        options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
-
+        orderDataSetFirebaseList = new ArrayList<>();
+        adapter = new Order_DataViewHolder(this, orderDataSetFirebaseList);
+        recyclerView.setAdapter(adapter);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("Orders");
 
         btnActive=findViewById(R.id.btn_active_order);
         btnCancel=findViewById(R.id.btn_cancel_order);
@@ -88,8 +61,33 @@ public class Order_Display_Activity extends AppCompatActivity {
         btnActive.setOnClickListener(new Click());
         btnHistory.setOnClickListener(new Click());
 
-            card();
+        //1. SELECT * FROM Artists
+        dbArtists = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("orders");
+        Query que = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
+                .child("orders");
+        que.addListenerForSingleValueEvent(valueEventListener);
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            orderDataSetFirebaseList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Order_DataSetFirebase orderDataSetFirebase = snapshot.getValue(Order_DataSetFirebase.class);
+                    orderDataSetFirebaseList.add(orderDataSetFirebase);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
+
     public class Click implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -97,69 +95,30 @@ public class Order_Display_Activity extends AppCompatActivity {
 
                 case R.id.btn_active_order:
                    // intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    databaseReference = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("active");
-                    databaseReference.keepSynced(true);
-                    options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
-                    card();
-                    firebaseRecyclerAdapter.startListening();
+                    Query active = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
+                            .child("orders")
+                            .orderByChild("status")
+                            .equalTo("active");
+                    active.addListenerForSingleValueEvent(valueEventListener);
                     break;
 
                 case R.id.btn_cancel_order:
-                    databaseReference = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("cancel");
-                    databaseReference.keepSynced(true);
-                    options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
-                    card();
-                    firebaseRecyclerAdapter.startListening();
+                    Query cancel = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
+                            .child("orders")
+                            .orderByChild("status")
+                            .equalTo("cancel");
+                    cancel.addListenerForSingleValueEvent(valueEventListener);
                     break;
 
                 case R.id.btn_history_order:
-                    databaseReference = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("history");
-                    databaseReference.keepSynced(true);
-                    options = new FirebaseRecyclerOptions.Builder<Order_DataSetFirebase>().setQuery(databaseReference, Order_DataSetFirebase.class).build();
-                    card();
-                    firebaseRecyclerAdapter.startListening();break;
+                    Query history = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
+                            .child("orders")
+                            .orderByChild("status")
+                            .equalTo("history");
+                    history.addListenerForSingleValueEvent(valueEventListener);
                 default:
 
             }
         }
-    }
-
-    void card(){
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Order_DataSetFirebase, Order_DataViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull final Order_DataViewHolder holder, int position, @NonNull final Order_DataSetFirebase model) {
-                holder.linearLayout.setBackgroundResource(img[new Random().nextInt(img.length)]);
-                //FirebaseRecyclerView main task where it fetching data from model
-                holder.shop.setText("Shop : "+model.getShop());
-                holder.date.setText("Date : "+model.getDate());
-                holder.status.setText("Status : "+model.getStatus());
-                holder.orderid.setText("ID : "+model.getOrderid());
-                Picasso.get().load(model.getProfile()).into(holder.profile);
-
-
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Order_Display_Activity.this, Order_Information_Activity.class);
-                        intent.putExtra("shop",model.getShop());
-                        intent.putExtra("date",model.getDate());
-                        intent.putExtra("status",model.getStatus());
-                        intent.putExtra("orderid",model.getOrderid());
-                        intent.putExtra("profile",model.getProfile());
-
-
-                        startActivity(intent);
-                    }
-                });
-            }
-
-            @NonNull
-            @Override
-            public Order_DataViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                return new Order_DataViewHolder(LayoutInflater.from(Order_Display_Activity.this).inflate(R.layout.order_grid,viewGroup,false));
-            }
-        };
-
-        recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 }

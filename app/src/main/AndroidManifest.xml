@@ -52,7 +52,9 @@
         <activity
             android:name=".Order_Information_Activity"
             android:theme="@style/AppTheme.PopMe" />
-        <activity android:name=".Order_Display_Activity" />
+        <activity android:name=".Order_Display_Activity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity android:name=".Order_Activity" />
         <activity android:name=".ScannerActivity" />
         <activity android:name=".Home" />

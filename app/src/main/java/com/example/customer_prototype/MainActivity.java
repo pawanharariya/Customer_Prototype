@@ -471,7 +471,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
             case R.id.nav_payment:
             {
-                // mAuth.signOut();
                 startActivity(new Intent(MainActivity.this,PayMent.class));
 
                 break;
