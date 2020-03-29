@@ -16,9 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewActivity"
+        <activity android:name=".Refer_Info"></activity>
+        <activity android:name=".Refer"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        </activity>
+        <activity
+            android:name=".NewActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".DetailsOffer"
             android:parentActivityName=".MainActivity"
@@ -52,7 +58,15 @@
         <activity
             android:name=".Order_Information_Activity"
             android:theme="@style/AppTheme.PopMe" />
-        <activity android:name=".Order_Display_Activity"
+        <activity
+            android:name=".Parking_Information_Activity"
+            android:theme="@style/AppTheme.PopMe" />
+        <activity
+            android:name=".Order_Display_Activity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".Parking_Display_Activity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity android:name=".Order_Activity" />
