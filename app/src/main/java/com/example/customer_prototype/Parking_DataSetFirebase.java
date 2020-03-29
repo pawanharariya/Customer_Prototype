@@ -2,7 +2,7 @@ package com.example.customer_prototype;
 
 public class Parking_DataSetFirebase {
 
-    public String status,orderid,date,shop,profile;
+    public String Name,Image,ShopName,email,genre;
 
     public Parking_DataSetFirebase() {
     }
