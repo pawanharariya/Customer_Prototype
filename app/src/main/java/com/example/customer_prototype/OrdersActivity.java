@@ -34,7 +34,9 @@ public class OrdersActivity extends AppCompatActivity {
         lstOrder.add(new Orders("He Died with...","Categorie Book","Description book",R.drawable.hediedwith));
 
         RecyclerView myrv =  findViewById(R.id.recyclerview_id);
+
         RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this,lstOrder);
+
         myrv.setLayoutManager(new GridLayoutManager(this,3));
         myrv.setAdapter(myAdapter);
 

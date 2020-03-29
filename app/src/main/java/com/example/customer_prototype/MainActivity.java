@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -51,6 +52,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import technolifestyle.com.imageslider.FlipperLayout;
 
@@ -112,14 +115,22 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     TextView txtName,txtEmail;
 
     ProgressDialog progressDialog;
-
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
 
-       // progressDialog = new ProgressDialog(MainActivity.this);
+        viewPager=findViewById(R.id.view_pager);
+        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(this);
+        viewPager.setAdapter(viewPagerAdapter);
+
+        Timer timer=new Timer();
+        timer.scheduleAtFixedRate(new MyTimeTask(),200,4000);
+
+
+        // progressDialog = new ProgressDialog(MainActivity.this);
         //progressDialog.setTitle("Loading");
         //progressDialog.show();
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -576,6 +587,25 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             e.printStackTrace();
         }
         return cityname;
+    }
+
+    public class MyTimeTask extends TimerTask{
+        @Override
+        public void run() {
+            MainActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(viewPager.getCurrentItem()==0){
+                        viewPager.setCurrentItem(1);
+                    }else if(viewPager.getCurrentItem()==1){
+                        viewPager.setCurrentItem(2);
+                    }
+                    else{
+                        viewPager.setCurrentItem(0);
+                    }
+                }
+            });
+        }
     }
 }
 
