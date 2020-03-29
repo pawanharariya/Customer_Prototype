@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_parking"
             android:icon="@drawable/ic_location_on_black_24dp"
-            android:title="Car Parking" />
+            android:title="Book Parking" />
         <item
         android:id="@+id/nav_FAQs"
         android:icon="@drawable/ic_poll_black_24dp"
