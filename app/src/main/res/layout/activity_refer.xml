@@ -90,20 +90,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/knowmore_btn"/>
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
+    
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:clickable="true"
+        android:onClick="on"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Invite now"
-        android:textSize="15sp"
-        android:textColor="#000000"
-        android:fontFamily="@font/open_sans_bold"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"            
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_w" />
+        app:layout_constraintTop_toBottomOf="@+id/view_w">
 
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/invite_now"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/open_sans_bold"/>
+        <ImageView
+            android:layout_margin="10dp"
+            android:background="@drawable/share_now"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            />
+
+
+    </LinearLayout>
+    
     <LinearLayout
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -111,7 +131,7 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <LinearLayout
             android:layout_margin="7dp"
@@ -120,7 +140,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/whatsapp_icon"
                 android:layout_width="35dp"
@@ -139,7 +159,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:background="@drawable/facebook_icon"
                 android:layout_marginBottom="2dp"
                 android:layout_width="35dp"
@@ -157,7 +177,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/twitter_icon"
                 android:layout_width="35dp"
@@ -175,7 +195,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:background="@drawable/more_icon"
                 android:layout_marginBottom="2dp"
                 android:layout_width="35dp"
