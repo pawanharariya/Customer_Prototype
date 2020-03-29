@@ -1,10 +1,14 @@
 package com.example.customer_prototype;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,10 +27,27 @@ import java.util.List;
 public class Parking_Display_Activity extends AppCompatActivity {
     Button btnActive,btnCancel,btnHistory;
     private RecyclerView recyclerView;
-    private Order_DataViewHolder adapter;
-    private List<Order_DataSetFirebase> orderDataSetFirebaseList;
+    private Parking_DataViewHolder adapter;
+    private List<Parking_DataSetFirebase> parkingDataSetFirebaseList;
 
     DatabaseReference dbArtists;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.book_park_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.park_scan)
+        {
+            Intent intent = new Intent(this,PayMent.class);
+            startActivity(intent);
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,35 +57,26 @@ public class Parking_Display_Activity extends AppCompatActivity {
         recyclerView = findViewById(R.id.Recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        orderDataSetFirebaseList = new ArrayList<>();
-        adapter = new Order_DataViewHolder(this, orderDataSetFirebaseList);
+        parkingDataSetFirebaseList = new ArrayList<>();
+        adapter = new Parking_DataViewHolder(this, parkingDataSetFirebaseList);
         recyclerView.setAdapter(adapter);
         ActionBar actionBar=getSupportActionBar();
-        actionBar.setTitle("Orders");
-
-        btnActive=findViewById(R.id.btn_active_order);
-        btnCancel=findViewById(R.id.btn_cancel_order);
-        btnHistory=findViewById(R.id.btn_history_order);
-
-        btnCancel.setOnClickListener(new Click());
-        btnActive.setOnClickListener(new Click());
-        btnHistory.setOnClickListener(new Click());
-
+        actionBar.setTitle("Book Parking");
+        
         //1. SELECT * FROM Artists
-        dbArtists = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference().child("orders");
-        Query que = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
-                .child("orders");
+        dbArtists = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/").getReference();
+        Query que = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/").getReference();
         que.addListenerForSingleValueEvent(valueEventListener);
     }
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            orderDataSetFirebaseList.clear();
+            parkingDataSetFirebaseList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Order_DataSetFirebase orderDataSetFirebase = snapshot.getValue(Order_DataSetFirebase.class);
-                    orderDataSetFirebaseList.add(orderDataSetFirebase);
+                    Parking_DataSetFirebase parkingDataSetFirebase = snapshot.getValue(Parking_DataSetFirebase.class);
+                    parkingDataSetFirebaseList.add(parkingDataSetFirebase);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -76,35 +88,10 @@ public class Parking_Display_Activity extends AppCompatActivity {
         }
     };
 
-
     public class Click implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-
-                case R.id.btn_active_order:
-                   // intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    Query active = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
-                            .child("orders")
-                            .orderByChild("status")
-                            .equalTo("active");
-                    active.addListenerForSingleValueEvent(valueEventListener);
-                    break;
-
-                case R.id.btn_cancel_order:
-                    Query cancel = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
-                            .child("orders")
-                            .orderByChild("status")
-                            .equalTo("cancel");
-                    cancel.addListenerForSingleValueEvent(valueEventListener);
-                    break;
-
-                case R.id.btn_history_order:
-                    Query history = FirebaseDatabase.getInstance("https://customerprototype-29375.firebaseio.com/").getReference()
-                            .child("orders")
-                            .orderByChild("status")
-                            .equalTo("history");
-                    history.addListenerForSingleValueEvent(valueEventListener);
                 default:
 
             }

@@ -21,18 +21,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-                <TextView
-                    android:id="@+id/close_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@id/constraintLayout"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="10dp"
-                    android:textSize="20sp"
-                    android:clickable="true"
-                    android:textColor="#FFF"
-                    android:text="x"
-                    app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -66,40 +54,46 @@
                             android:id="@+id/shop_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:text="Shop"
                             android:textAlignment="textStart"
                             android:textAllCaps="true"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:layout_margin="8dp"
-                            android:id="@+id/date_id"
+                            android:id="@+id/email_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:text="Email"
                             android:textAlignment="textStart"
                             android:textAllCaps="true"
                             app:layout_constraintTop_toBottomOf="@+id/shop_id" />
 
                         <TextView
                             android:layout_margin="8dp"
-                            android:id="@+id/order_id"
+                            android:id="@+id/genre_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:text="Genre"
                             android:textAlignment="textStart"
                             android:textAllCaps="true"
                             app:layout_constraintTop_toBottomOf="@+id/date_id" />
 
                         <TextView
                             android:layout_margin="8dp"
-                            android:id="@+id/status_id"
+                            android:id="@+id/name_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:text="Name"
                             android:textAlignment="textStart"
                             android:textAllCaps="true"
                             app:layout_constraintTop_toBottomOf="@+id/order_id" />
+                        <Button
+                            android:id="@+id/book_park"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Book"/>
 
                 </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

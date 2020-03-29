@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#000"
         android:orientation="horizontal"
         android:id="@+id/linear_lay">
         <de.hdodenhof.circleimageview.CircleImageView
@@ -24,65 +25,48 @@
             android:layout_margin="15dp"/>
         <LinearLayout
             android:id="@+id/linear_mid"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="vertical">
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
-                android:text="Shop"
+                android:text="Shop Name"
                 android:layout_margin="5dp"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
                 android:id="@+id/shop_id"/>
             <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textSize="12sp"
-                android:text="Date"
-                android:textAllCaps="true"
-                android:textColor="#FFFFFF"
-                android:id="@+id/date_id"/>
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textAllCaps="true"
-                android:textSize="12sp"
-                android:text="Status"
-                android:textColor="#FFFFFF"
-                android:id="@+id/status_id"/>
-        </LinearLayout>
-            <TextView
-                android:id="@+id/txt_amt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Amount"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                app:layout_constraintStart_toStartOf="@+id/linear_mid"
-                android:layout_gravity="bottom"/>
-        <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/money_id"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="bottom"
-                app:layout_constraintStart_toStartOf="@+id/txt_amt"
-                android:layout_marginBottom="7.5dp"
-                android:src="@drawable/amt_icon"/>
+                android:layout_margin="5dp"
+                android:textSize="12sp"
+                android:text="Email"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:id="@+id/email_id"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                android:text="name"
+                android:textColor="#FFFFFF"
+                android:id="@+id/name_id"/>
+            <TextView
+                android:id="@+id/genre_id"
+                android:layout_margin="5dp"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Genre"/>
+        </LinearLayout>
+
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10.5sp"
-        android:layout_gravity="end"
-        android:text="ID"
-        android:textColor="#FFFFFF"
-        android:layout_margin="10dp"
-        android:id="@+id/order_id"/>
 
 </androidx.cardview.widget.CardView>
