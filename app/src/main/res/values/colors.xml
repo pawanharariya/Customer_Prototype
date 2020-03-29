@@ -14,5 +14,7 @@
 
     <color name="whitecolor">#fff</color>
 
+    <color name="light_gray">#575050</color>
+
     <color name="fullwhite">#C6C6C6</color>
 </resources>

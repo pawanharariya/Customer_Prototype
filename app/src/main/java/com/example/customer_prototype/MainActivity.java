@@ -451,6 +451,11 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 startActivity(new Intent(MainActivity.this,HelpAndSupport.class));
                 break;
             }
+            case R.id.nav_parking:
+            {
+                startActivity(new Intent(MainActivity.this,Parking_Display_Activity.class));
+                break;
+            }
             case R.id.nav_orders:
             {
                 startActivity(new Intent(MainActivity.this,Order_Display_Activity.class));
@@ -466,19 +471,17 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             {
                 mAuth.signOut();
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
-
                 break;
             }
             case R.id.nav_payment:
             {
-                // mAuth.signOut();
                 startActivity(new Intent(MainActivity.this,PayMent.class));
 
                 break;
             }
-            case R.id.nav_term_condition:
+            case R.id.nav_refer:
             {
-                startActivity(new Intent(MainActivity.this,TermAndCondition.class));
+                startActivity(new Intent(MainActivity.this,Refer.class));
             }
         }
         mNavDrawer.closeDrawer(GravityCompat.START);

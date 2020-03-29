@@ -1,37 +1,26 @@
 package com.example.customer_prototype;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.SplittableRandom;
 
-public class Order_Display_Activity extends AppCompatActivity {
+public class Parking_Display_Activity extends AppCompatActivity {
     Button btnActive,btnCancel,btnHistory;
     private RecyclerView recyclerView;
     private Order_DataViewHolder adapter;
@@ -42,7 +31,7 @@ public class Order_Display_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_display);
+        setContentView(R.layout.activity_parking_display);
 
         recyclerView = findViewById(R.id.Recyclerview);
         recyclerView.setHasFixedSize(true);

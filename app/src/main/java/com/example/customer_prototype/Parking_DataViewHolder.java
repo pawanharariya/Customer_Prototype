@@ -20,7 +20,7 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class Order_DataViewHolder extends RecyclerView.Adapter<Order_DataViewHolder.ArtistViewHolder> {
+public class Parking_DataViewHolder extends RecyclerView.Adapter<Parking_DataViewHolder.ArtistViewHolder> {
     final int[] img = {
             R.drawable.back,
             R.drawable.back1,
@@ -37,7 +37,7 @@ public class Order_DataViewHolder extends RecyclerView.Adapter<Order_DataViewHol
     private Context mCtx;
     private List<Order_DataSetFirebase> orderDataSetFirebaseList;
 
-    public Order_DataViewHolder(Context mCtx, List<Order_DataSetFirebase> orderDataSetFirebaseList) {
+    public Parking_DataViewHolder(Context mCtx, List<Order_DataSetFirebase> orderDataSetFirebaseList) {
         this.mCtx = mCtx;
         this.orderDataSetFirebaseList = orderDataSetFirebaseList;
     }
@@ -45,7 +45,7 @@ public class Order_DataViewHolder extends RecyclerView.Adapter<Order_DataViewHol
     @NonNull
     @Override
     public ArtistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.order_grid, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.parking_grid, parent, false);
         return new ArtistViewHolder(view);
     }
 

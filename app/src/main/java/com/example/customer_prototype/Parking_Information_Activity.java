@@ -11,14 +11,14 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Order_Information_Activity extends Activity {
+public class Parking_Information_Activity extends Activity {
 
     TextView shop_id,date_id,status_id,order_id;
     CircleImageView profile_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_infromation);
+        setContentView(R.layout.activity_parking_infromation);
 
         String shop = getIntent().getStringExtra("shop");
         String date = getIntent().getStringExtra("date");

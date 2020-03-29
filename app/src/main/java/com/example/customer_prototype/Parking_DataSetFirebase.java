@@ -1,9 +1,9 @@
 package com.example.customer_prototype;
 
-public class Order_DataSetFirebase {
+public class Parking_DataSetFirebase {
 
     public String status,orderid,date,shop,profile;
 
-    public Order_DataSetFirebase() {
+    public Parking_DataSetFirebase() {
     }
 }

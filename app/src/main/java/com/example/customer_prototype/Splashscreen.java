@@ -20,7 +20,6 @@ public class Splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
-        image=findViewById(R.id.splash_screen);
         new MyThread().start();
 
 
@@ -34,7 +33,7 @@ public class Splashscreen extends AppCompatActivity {
         {
             super.run();
             try {
-                Thread.sleep(3000);
+                Thread.sleep(2000);
                 Intent in=new Intent(Splashscreen.this, MainActivity.class);
                 startActivity(in);
                 finish();
