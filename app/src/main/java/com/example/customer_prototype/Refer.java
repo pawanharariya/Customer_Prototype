@@ -50,7 +50,7 @@ public class Refer extends AppCompatActivity {
     {
         Intent share_intent = new Intent();
         share_intent.setAction(Intent.ACTION_SEND);
-        share_intent.putExtra(Intent.EXTRA_TEXT,"http://www.google.com");
+        share_intent.putExtra(Intent.EXTRA_TEXT,"Play store Link has to be provide here. Thank You!");
         share_intent.setType("text/plain");
         startActivity(Intent.createChooser(share_intent,"share via"));
     }
