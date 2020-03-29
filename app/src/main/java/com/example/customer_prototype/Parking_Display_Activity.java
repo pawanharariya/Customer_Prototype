@@ -1,10 +1,14 @@
 package com.example.customer_prototype;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +31,23 @@ public class Parking_Display_Activity extends AppCompatActivity {
     private List<Parking_DataSetFirebase> parkingDataSetFirebaseList;
 
     DatabaseReference dbArtists;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.book_park_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.park_scan)
+        {
+            Intent intent = new Intent(this,PayMent.class);
+            startActivity(intent);
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +87,6 @@ public class Parking_Display_Activity extends AppCompatActivity {
 
         }
     };
-
 
     public class Click implements View.OnClickListener{
         @Override
