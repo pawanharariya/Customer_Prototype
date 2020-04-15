@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class MainAdapter  extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
+class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     ArrayList<MainModel> mainModels;
     Context context;
 
-    public MainAdapter(Context context,ArrayList<MainModel> mainModels) {
+    public MainAdapter(Context context, ArrayList<MainModel> mainModels) {
         this.mainModels = mainModels;
         this.context = context;
     }
@@ -25,7 +25,7 @@ class MainAdapter  extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
 
         return new ViewHolder(view);
     }
@@ -42,12 +42,14 @@ class MainAdapter  extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public int getItemCount() {
         return mainModels.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView name;
-        public ViewHolder(View itemView){
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            image=itemView.findViewById(R.id.image_view);
+            image = itemView.findViewById(R.id.image_view);
 
         }
     }

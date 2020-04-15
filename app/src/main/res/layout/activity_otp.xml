@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
     android:background="@color/lightwhite"
-    >
+    android:orientation="vertical"
+    android:padding="10dp">
 
 
     <LinearLayout
@@ -19,36 +17,37 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" OTP "
             android:layout_gravity="center"
             android:fontFamily="sans-serif-medium"
+            android:text=" OTP "
             android:textColor="@color/blackcolor"
             android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/img"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="40dp"
+            android:background="@drawable/img">
+
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/ic_face_bliack"
-                />
+                android:src="@drawable/ic_face_bliack" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/otp_text_view"
             android:layout_width="280dp"
             android:layout_height="45dp"
-            android:hint="Enter Otp"
-            android:elevation="5dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:paddingLeft="15dp"
+            android:background="@drawable/btn"
+            android:elevation="5dp"
+            android:hint="Enter Otp"
             android:inputType="number"
-            android:background="@drawable/btn"/>
+            android:paddingLeft="15dp" />
 
         <Button
             android:id="@+id/verify_btn"
@@ -56,10 +55,11 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
+            android:background="@drawable/joinbtn"
             android:text="Verify"
             android:textAllCaps="false"
-            android:background="@drawable/joinbtn"
-            android:textColor="@color/whitecolor"/>
+            android:textColor="@color/whitecolor" />
+
         <TextView
             android:id="@+id/otp_form_feedback"
             android:layout_width="wrap_content"
@@ -79,11 +79,11 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/verify_btn"
             app:layout_constraintEnd_toEndOf="@+id/verify_btn"
-            app:layout_constraintTop_toTopOf="@+id/verify_btn"
-            android:layout_marginRight="16dp" />
+            app:layout_constraintTop_toTopOf="@+id/verify_btn" />
     </LinearLayout>
 
 </RelativeLayout>

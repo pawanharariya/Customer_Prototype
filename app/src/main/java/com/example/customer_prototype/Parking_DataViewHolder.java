@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,7 +38,7 @@ public class Parking_DataViewHolder extends RecyclerView.Adapter<Parking_DataVie
     @Override
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
         Parking_DataSetFirebase parkingDataSetFirebase = parkingDataSetFirebaseList.get(position);
-        holder.shop.setText("Shop Name : "+parkingDataSetFirebase.ShopName);
+        holder.shop.setText("Shop Name : " + parkingDataSetFirebase.ShopName);
         holder.email.setText("Email : " + parkingDataSetFirebase.email);
         holder.genre.setText("Genre : " + parkingDataSetFirebase.genre);
         holder.name.setText("Name : " + parkingDataSetFirebase.Name);
@@ -50,11 +49,11 @@ public class Parking_DataViewHolder extends RecyclerView.Adapter<Parking_DataVie
             public void onClick(View v) {
 
                 Intent intent = new Intent(mCtx, Parking_Information_Activity.class);
-                intent.putExtra("shop",parkingDataSetFirebase.ShopName);
-                intent.putExtra("name",parkingDataSetFirebase.Name);
-                intent.putExtra("email",parkingDataSetFirebase.email);
-                intent.putExtra("genre",parkingDataSetFirebase.genre);
-                intent.putExtra("image",parkingDataSetFirebase.Image);
+                intent.putExtra("shop", parkingDataSetFirebase.ShopName);
+                intent.putExtra("name", parkingDataSetFirebase.Name);
+                intent.putExtra("email", parkingDataSetFirebase.email);
+                intent.putExtra("genre", parkingDataSetFirebase.genre);
+                intent.putExtra("image", parkingDataSetFirebase.Image);
                 mCtx.startActivity(intent);
             }
         });
@@ -66,7 +65,7 @@ public class Parking_DataViewHolder extends RecyclerView.Adapter<Parking_DataVie
     }
 
     class ArtistViewHolder extends RecyclerView.ViewHolder {
-        public TextView genre,shop,name,email;
+        public TextView genre, shop, name, email;
         public CardView cardView;
         public LinearLayout linearLayout;
         public CircleImageView profile;

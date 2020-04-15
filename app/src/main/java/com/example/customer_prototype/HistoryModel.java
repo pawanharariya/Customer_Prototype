@@ -1,15 +1,14 @@
 package com.example.customer_prototype;
 
 public class HistoryModel {
-    String Details,Issue,status,id;
-
+    String Details, Issue, status, id;
 
 
     public HistoryModel(String details, String issue, String status, String id) {
         Details = details;
         Issue = issue;
         this.status = status;
-       this.id=id;
+        this.id = id;
     }
 
     public String getId() {

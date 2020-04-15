@@ -1,86 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp">
-    <androidx.cardview.widget.CardView
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:layout_marginBottom="5dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
-        card_view:cardUseCompatPadding="true"
-        android:layout_marginBottom="5dp"
-        >
+        card_view:cardUseCompatPadding="true">
+
         <RelativeLayout
             android:id="@+id/first"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/pro"
-                android:layout_height="100dp"
                 android:layout_width="130dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/cccd">
-            </ImageView>
+                android:layout_marginTop="5dp"
+                android:src="@drawable/cccd"></ImageView>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_cancel_black_24dp"
+                android:layout_marginLeft="27dp"
                 android:layout_marginTop="105dp"
-                android:layout_marginLeft="27dp">
-            </ImageView>
+                android:src="@drawable/ic_cancel_black_24dp"></ImageView>
+
             <TextView
                 android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textSize="20dp"
-                android:layout_marginTop="105dp"
                 android:layout_marginLeft="80dp"
-                >
-            </TextView>
+                android:layout_marginTop="105dp"
+                android:text="Cancel"
+                android:textSize="20dp"></TextView>
+
             <TextView
                 android:id="@+id/itemname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35dp"
-                android:text="Coffee"
+                android:layout_marginLeft="210dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="210dp">
-            </TextView>
+                android:text="Coffee"
+                android:textSize="35dp"></TextView>
+
             <TextView
                 android:id="@+id/itemprize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="19dp"
+                android:layout_marginLeft="252dp"
+                android:layout_marginTop="65dp"
                 android:text="Rs20"
                 android:textColor="#000000"
-                android:layout_marginTop="65dp"
-                android:layout_marginLeft="252dp">
+                android:textSize="19dp">
 
             </TextView>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/track"
+                android:layout_marginLeft="232dp"
                 android:layout_marginTop="105dp"
-                android:layout_marginLeft="232dp">
-            </ImageView>
+                android:src="@drawable/track"></ImageView>
+
             <TextView
                 android:id="@+id/track"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Track"
-                android:textSize="20dp"
-                android:layout_marginTop="105dp"
                 android:layout_marginLeft="270dp"
-                >
-            </TextView>
+                android:layout_marginTop="105dp"
+                android:text="Track"
+                android:textSize="20dp"></TextView>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

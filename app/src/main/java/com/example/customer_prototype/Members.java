@@ -5,7 +5,8 @@ public class Members {
 
     private String issue;
     private String details;
-    public Members(){
+
+    public Members() {
 
     }
 

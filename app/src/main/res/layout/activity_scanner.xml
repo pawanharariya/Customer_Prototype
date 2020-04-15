@@ -10,31 +10,30 @@
         android:id="@+id/scanner_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#FFF"
         app:autoFocusButtonColor="@android:color/white"
         app:autoFocusButtonVisible="true"
         app:flashButtonColor="@android:color/white"
         app:flashButtonVisible="true"
-        app:frameColor="@android:color/white"
-        app:frameCornersSize="50dp"
-        app:frameCornersRadius="0dp"
-        app:frameAspectRatioWidth="1"
         app:frameAspectRatioHeight="1"
-        android:background="#FFF"
+        app:frameAspectRatioWidth="1"
+        app:frameColor="@android:color/white"
+        app:frameCornersRadius="0dp"
+        app:frameCornersSize="50dp"
         app:frameSize="0.75"
         app:frameThickness="2dp"
-        app:maskColor="#77000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        ></com.budiyev.android.codescanner.CodeScannerView>
+        app:maskColor="#77000000"></com.budiyev.android.codescanner.CodeScannerView>
 
 
     <TextView
         android:id="@+id/resultQr"
         android:layout_width="match_parent"
-        android:background="#FFF"
         android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="16dp"
+        android:background="#FFF"
         android:hint="textview"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteY="627dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

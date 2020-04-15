@@ -1,11 +1,9 @@
 package com.example.customer_prototype;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -26,19 +24,19 @@ public class FetchActivity extends Activity {
     private FirebaseDatabase firebaseDatabase;
     private StorageReference storageReference;
     private FirebaseStorage firebaseStorage;
-    private EditText etname,etemail,etshop,etlongitude,etlatitude,etgenre;
+    private EditText etname, etemail, etshop, etlongitude, etlatitude, etgenre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fetch);
 
-        etname=findViewById(R.id.fetch_name);
-        etemail=findViewById(R.id.fetch_email);
-        etgenre=findViewById(R.id.fetch_genre);
-        etshop=findViewById(R.id.fetch_shop);
-        etlatitude=findViewById(R.id.fetch_lati);
-        etlongitude=findViewById(R.id.fetch_long);
+        etname = findViewById(R.id.fetch_name);
+        etemail = findViewById(R.id.fetch_email);
+        etgenre = findViewById(R.id.fetch_genre);
+        etshop = findViewById(R.id.fetch_shop);
+        etlatitude = findViewById(R.id.fetch_lati);
+        etlongitude = findViewById(R.id.fetch_long);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/");
@@ -65,10 +63,11 @@ public class FetchActivity extends Activity {
                     etlatitude.setText(latitude);
                     etlongitude.setText(longitude);
 
-                }catch (Exception e){
-                    Log.d("FetchActivity","exception"+e);
+                } catch (Exception e) {
+                    Log.d("FetchActivity", "exception" + e);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }

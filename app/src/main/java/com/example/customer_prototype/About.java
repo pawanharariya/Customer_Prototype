@@ -1,5 +1,24 @@
 package com.example.customer_prototype;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -9,32 +28,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -51,8 +44,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,33 +53,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-public class About extends AppCompatActivity implements  OnMapReadyCallback,
+public class About extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener
         , LocationListener {
 
+    public static final int PERMISSION_REQUEST_CODE = 9001;
+    private static final int REQUEST_CODE = 101;
+    private static final int Request_User_Location_Code = 99;
+    private final int PLAY_SERVICES_ERROR_CODE = 9002;
+//    ImageButton school=findViewById(R.id.school_nearby);
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int REQUEST_CODE=101;
     GoogleMap mGoogleMap;
-//    ImageButton school=findViewById(R.id.school_nearby);
-
-    ImageButton school,hospital,restraunt;
-
-
-    Button btnNearstFood,btnNearstHospital,btnNearstParking;
-
+    ImageButton school, hospital, restraunt;
+    Button btnNearstFood, btnNearstHospital, btnNearstParking;
+    double latitude, longitude;
+    Button btnsort;
+    SharedPreferences preferences;
+    RecyclerView mRecyclerView;
+    MyAdapter myAdapter;
+    ArrayList<ShowDataOnMap> showDataOnMapList;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     private boolean mLocationPermissionGranted;
-    public static final int PERMISSION_REQUEST_CODE = 9001;
-    private final int PLAY_SERVICES_ERROR_CODE = 9002;
-
     private FusedLocationProviderClient mLocationClient;
-
     private BottomSheetBehavior bottomSheetBehavior;
     private LinearLayout linearLayoutBSheet;
     private ToggleButton tbUpDown;
@@ -100,39 +91,24 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     private LocationRequest locationRequest;
     private Location lastlocation;
     private Marker currentUserLocationMarker;
-    private static final int Request_User_Location_Code=99;
-    double latitude,longitude;
-    private int ProxymityRadius=1000;
-
-    Button btnsort;
-
-    SharedPreferences preferences;
-
-    RecyclerView mRecyclerView;
-    MyAdapter myAdapter;
-    ArrayList<ShowDataOnMap> showDataOnMapList;
-
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-
-
+    private int ProxymityRadius = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        btnsort=findViewById(R.id.btnSort);
+        btnsort = findViewById(R.id.btnSort);
 
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Stores");
 
 
-        showDataOnMapList=new ArrayList<>();
+        showDataOnMapList = new ArrayList<>();
 
-        school=findViewById(R.id.school_nearby);
-        hospital=findViewById(R.id.hospital_nearby);
-        restraunt=findViewById(R.id.restraunt_nearby);
+        school = findViewById(R.id.school_nearby);
+        hospital = findViewById(R.id.hospital_nearby);
+        restraunt = findViewById(R.id.restraunt_nearby);
 
         //now create a model class;
         //now create MyHolder class;
@@ -143,18 +119,18 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
             @Override
             public void onClick(View view) {
 
-                String hospital="hospital", school="shop",restaurant="restaurant";
+                String hospital = "hospital", school = "shop", restaurant = "restaurant";
 
                 String url;
-                Object transferData[]=new Object[2];
-                GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
+                Object[] transferData = new Object[2];
+                GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
                 mMap.clear();
                 url = getUrl(latitude, longitude, school);
                 transferData[0] = mMap;
                 transferData[1] = url;
 
                 getNearbyPlaces.execute(transferData);
-              //  Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
                 //Toast.makeText(About.this, "location show", Toast.LENGTH_SHORT).show();
             }
         });
@@ -162,17 +138,17 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String hospital="hospital", school="shop",restaurant="restaurant";
-                GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
+                String hospital = "hospital", school = "shop", restaurant = "restaurant";
+                GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
                 String url;
-                Object transferData[]=new Object[2];
+                Object[] transferData = new Object[2];
                 mMap.clear();
                 url = getUrl(latitude, longitude, hospital);
                 transferData[0] = mMap;
                 transferData[1] = url;
 
                 getNearbyPlaces.execute(transferData);
-               // Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
                 //Toast.makeText(About.this, "location show", Toast.LENGTH_SHORT).show();
 
             }
@@ -180,26 +156,26 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         restraunt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String hospital="hospital", school="shop",restaurant="restaurant";
-                GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
+                String hospital = "hospital", school = "shop", restaurant = "restaurant";
+                GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
                 String url;
-                Object transferData[]=new Object[2];
+                Object[] transferData = new Object[2];
 
                 mMap.clear();
-                url=getUrl(latitude,longitude,restaurant);
-                transferData[0]=mMap;
-                transferData[1]=url;
+                url = getUrl(latitude, longitude, restaurant);
+                transferData[0] = mMap;
+                transferData[1] = url;
 
                 getNearbyPlaces.execute(transferData);
-               // Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(About.this, "searching", Toast.LENGTH_SHORT).show();
                 //Toast.makeText(About.this, "locatio show", Toast.LENGTH_SHORT).show();
             }
         });
 
-        mRecyclerView=findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager((this)));
-       // preferences=this.getSharedPreferences("My_Pref",MODE_PRIVATE);
+        // preferences=this.getSharedPreferences("My_Pref",MODE_PRIVATE);
 
         getMyList();
         init();
@@ -210,9 +186,9 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         tbUpDown.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }else{
+                } else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
             }
@@ -221,9 +197,9 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(View view, int newState) {
-                if(newState == BottomSheetBehavior.STATE_EXPANDED){
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     tbUpDown.setChecked(true);
-                }else if(newState == BottomSheetBehavior.STATE_COLLAPSED){
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     tbUpDown.setChecked(false);
                 }
             }
@@ -234,7 +210,7 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
             }
         });
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkUserLocationPermission();
         }
 
@@ -276,28 +252,27 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
         });*/
 
 
-
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.about);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
-                    case  R.id.dashboard1:
-                        startActivity(new Intent(getApplicationContext(),Dashboard.class));
-                        overridePendingTransition(0,0);
+                    case R.id.dashboard1:
+                        startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                        overridePendingTransition(0, 0);
                         finish();
                         return true;
 
-                    case  R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
                         finish();
                         return true;
 
-                    case  R.id.about:
+                    case R.id.about:
                         return true;
                 }
 
@@ -305,7 +280,7 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
             }
         });
 
-       // fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
+        // fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
         //fetchLocation();
 
     }
@@ -314,21 +289,21 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     //phale// private ArrayList<Model> getMyList() {
 
     private void getMyList() {
-        ArrayList<ShowDataOnMap> showDataOnMaps=new ArrayList<>();
+        ArrayList<ShowDataOnMap> showDataOnMaps = new ArrayList<>();
 
-        FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/");
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        ShowDataOnMap showDataOnMap=snapshot.getValue(ShowDataOnMap.class);
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        ShowDataOnMap showDataOnMap = snapshot.getValue(ShowDataOnMap.class);
                         showDataOnMapList.add(showDataOnMap);
                     }
 
-                    myAdapter=new MyAdapter(About.this,showDataOnMapList);
+                    myAdapter = new MyAdapter(About.this, showDataOnMapList);
                     mRecyclerView.setAdapter(myAdapter);
                 }
             }
@@ -371,17 +346,17 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
 
         //phale return models;
 
-       // String mSortSetting =preferences.getString("Sort","ascending");
+        // String mSortSetting =preferences.getString("Sort","ascending");
 
         //if(mSortSetting.equals("ascending")){
-            //Collections.sort(models,Model.By_TITLE_ASCENDING);
+        //Collections.sort(models,Model.By_TITLE_ASCENDING);
         //}
         //else if(mSortSetting.equals("descending")){
-          //  Collections.sort(models,Model.By_TITLE_DESCENDINgG);
+        //  Collections.sort(models,Model.By_TITLE_DESCENDINgG);
         //}
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//i will create recycleviw in linerarlayout
-        myAdapter=new MyAdapter(this,showDataOnMaps);
+        myAdapter = new MyAdapter(this, showDataOnMaps);
         mRecyclerView.setAdapter(myAdapter);
 
 
@@ -416,14 +391,14 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     }*/
 
 
-    public void onClick(View v){
+    public void onClick(View v) {
 
-        String hospital="hospital", school="shop",restaurant="restaurant";
+        String hospital = "hospital", school = "shop", restaurant = "restaurant";
 
-        Object transferData[]=new Object[2];
-        GetNearbyPlaces getNearbyPlaces=new GetNearbyPlaces();
+        Object[] transferData = new Object[2];
+        GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
 
-        switch (v.getId()){
+        switch (v.getId()) {
             /*case R.id.search_address:
                 EditText addressField=findViewById(R.id.location_search);
                 String address=addressField.getText().toString();
@@ -464,9 +439,9 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
             case R.id.hospital_nearby:
                 Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
                 mMap.clear();
-                String url=getUrl(latitude,longitude,hospital);
-                transferData[0]=mMap;
-                transferData[1]=url;
+                String url = getUrl(latitude, longitude, hospital);
+                transferData[0] = mMap;
+                transferData[1] = url;
 
                 getNearbyPlaces.execute(transferData);
                 Toast.makeText(this, "Searching near by hospital", Toast.LENGTH_SHORT).show();
@@ -488,9 +463,9 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
 
             case R.id.restraunt_nearby:
                 mMap.clear();
-                url=getUrl(latitude,longitude,restaurant);
-                transferData[0]=mMap;
-                transferData[1]=url;
+                url = getUrl(latitude, longitude, restaurant);
+                transferData[0] = mMap;
+                transferData[1] = url;
 
                 getNearbyPlaces.execute(transferData);
                 Toast.makeText(this, "Searching near by restarunt", Toast.LENGTH_SHORT).show();
@@ -502,14 +477,14 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
 
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
 
-        StringBuilder googleURL=new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        googleURL.append("location=" + latitude+","+longitude);
+        StringBuilder googleURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googleURL.append("location=" + latitude + "," + longitude);
         googleURL.append("&radius=" + ProxymityRadius);
         googleURL.append("&type=" + nearbyPlace);
         googleURL.append("&sensor=true");
         googleURL.append("&key=" + "AIzaSyDJIq4-W6B09EtXLfOMJ28MAjTqRnvghiw");
 
-        Log.d("GooglrmapActivity","url =" +googleURL.toString());
+        Log.d("GooglrmapActivity", "url =" + googleURL.toString());
 
         return googleURL.toString();
 
@@ -519,58 +494,46 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
     }
 
-    public boolean checkUserLocationPermission()
-    {
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
-        {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION))
-            {
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},Request_User_Location_Code);
-            }
-            else
-            {
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},Request_User_Location_Code);
+    public boolean checkUserLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Request_User_Location_Code);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Request_User_Location_Code);
             }
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode)
-        {
-            case  Request_User_Location_Code:
-                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
-                {
-                    if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED)
-                    {
-                        if(googleApiClient==null){
+        switch (requestCode) {
+            case Request_User_Location_Code:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        if (googleApiClient == null) {
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
                 }
                 return;
         }
     }
 
-    protected synchronized  void buildGoogleApiClient(){
-        googleApiClient=new GoogleApiClient.Builder(this)
+    protected synchronized void buildGoogleApiClient() {
+        googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -582,42 +545,42 @@ public class About extends AppCompatActivity implements  OnMapReadyCallback,
     @Override
     public void onLocationChanged(Location location) {
 
-        latitude=location.getLatitude();
-        longitude=location.getLongitude();
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
 
-        lastlocation=location;
-        if(currentUserLocationMarker!=null){
+        lastlocation = location;
+        if (currentUserLocationMarker != null) {
             currentUserLocationMarker.remove();
 
         }
-        LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
-        MarkerOptions markerOptions=new MarkerOptions();
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("user current Location");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
-        currentUserLocationMarker=mMap.addMarker(markerOptions);
+        currentUserLocationMarker = mMap.addMarker(markerOptions);
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        CameraUpdate cameraUpdateFactory=CameraUpdateFactory.newLatLngZoom(latLng,14);
+        CameraUpdate cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(latLng, 14);
         mMap.moveCamera(cameraUpdateFactory);
-       // mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
+        // mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
 
-        if(googleApiClient!=null){
-            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient,this);
+        if (googleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
         }
 
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        locationRequest=new LocationRequest();
+        locationRequest = new LocationRequest();
         locationRequest.setInterval(1100);
         locationRequest.setFastestInterval(1100);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
-            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,locationRequest,this);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
 
         }
 

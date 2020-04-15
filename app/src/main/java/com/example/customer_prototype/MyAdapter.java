@@ -2,18 +2,13 @@ package com.example.customer_prototype;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
@@ -33,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view =LayoutInflater.from(parent.getContext()).inflate(R.layout.row,null);//this line inflate our row
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, null);//this line inflate our row
         return new MyHolder(view);//this will return our view to holder class
     }
 
@@ -46,7 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
         holder.email.setText(showDataOnMaps.get(position).getEmail());
         holder.genre.setText(showDataOnMaps.get(position).getGenre());
         // holder.mImageView.setImageResource(models.get(position).getImg());//here we used image resource
-          //because we will use images in our resource folder which is drawable
+        //because we will use images in our resource folder which is drawable
 
 
         //this method is than you can use when you want to use one activity
@@ -55,12 +50,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
             @Override
             public void onItemClickListner(View v, int position) {
 
-                String latitudeUser=String.valueOf(showDataOnMaps.get(position).getLatitude());//these object get our data from previos activity
-                String longitudeUser=String.valueOf(showDataOnMaps.get(position).getLongitude());//same upper
-                String  nameUser=showDataOnMaps.get(position).getName();
-                String  shopNameUser=showDataOnMaps.get(position).getShopName();
-                String  emailUser=showDataOnMaps.get(position).getEmail();
-                String  genreUser=showDataOnMaps.get(position).getGenre();
+                String latitudeUser = String.valueOf(showDataOnMaps.get(position).getLatitude());//these object get our data from previos activity
+                String longitudeUser = String.valueOf(showDataOnMaps.get(position).getLongitude());//same upper
+                String nameUser = showDataOnMaps.get(position).getName();
+                String shopNameUser = showDataOnMaps.get(position).getShopName();
+                String emailUser = showDataOnMaps.get(position).getEmail();
+                String genreUser = showDataOnMaps.get(position).getGenre();
 
                 /* Log.d("latitude","lat"+latitudeUser);
                 Log.d("longitude","lag"+longitudeUser);*/
@@ -77,13 +72,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
                 //get our data with intent
 
-                Intent intent=new Intent(c,AnotherActivity.class);
-                intent.putExtra("latitude",latitudeUser);
-                intent.putExtra("longitude",longitudeUser);
-                intent.putExtra("name",nameUser);
-                intent.putExtra("shopname",shopNameUser);
-                intent.putExtra("email",emailUser);
-                intent.putExtra("genre",genreUser);
+                Intent intent = new Intent(c, AnotherActivity.class);
+                intent.putExtra("latitude", latitudeUser);
+                intent.putExtra("longitude", longitudeUser);
+                intent.putExtra("name", nameUser);
+                intent.putExtra("shopname", shopNameUser);
+                intent.putExtra("email", emailUser);
+                intent.putExtra("genre", genreUser);
 
                 c.startActivity(intent);
             }

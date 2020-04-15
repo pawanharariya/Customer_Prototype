@@ -5,12 +5,12 @@ class MainModel {
     Integer logo;
 
 
-    MainModel(Integer logo){
-        this.logo=logo;
+    MainModel(Integer logo) {
+        this.logo = logo;
 
     }
 
-    public Integer getLogo(){
+    public Integer getLogo() {
         return logo;
     }
 

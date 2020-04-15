@@ -1,12 +1,9 @@
 package com.example.customer_prototype;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
 class TermModel {
 
-   String Offer;
-    String  genre;
+    String Offer;
+    String genre;
 
     public TermModel() {
     }
@@ -16,7 +13,7 @@ class TermModel {
         this.genre = genre;
     }
 
-    public String  getOffer() {
+    public String getOffer() {
         return Offer;
     }
 

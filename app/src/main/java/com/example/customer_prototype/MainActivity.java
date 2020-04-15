@@ -1,18 +1,5 @@
 package com.example.customer_prototype;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -28,10 +15,20 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.GoogleMap;
@@ -55,79 +52,58 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import technolifestyle.com.imageslider.FlipperLayout;
-
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public static final int DEFAULT_ZOOM = 15;
+    public static final int PERMISSION_REQUEST_CODE = 9001;
+    private static final int REQUEST_CODE = 101;
+    private final double TMU_LAT = 28.825583;
+    private final double TMU_LNG = 78.657610;
+    private final int PLAY_SERVICES_ERROR_CODE = 9002;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int REQUEST_CODE=101;
-    Button btnNearstFood,btnNearstHospital,btnNearstParking;
-
-
-    private DatabaseReference databaseReference2;
+    Button btnNearstFood, btnNearstHospital, btnNearstParking;
     StorageReference storageReference;
     FirebaseDatabase firebaseDatabase2;
-
     ArrayList<TermModel> termModelArrayList;
     RecyclerView recyclerView;
-
     TermAdapter termAdapter;
-
-
     GoogleMap mGoogleMap;
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     View viewHeader;
-
-
-
-    private FirebaseAuth mAuth;
-    private FirebaseUser mCurrentUser;
-
-    private Button mLogoutBtn;
-
-    public static final int DEFAULT_ZOOM = 15;
-    private final double TMU_LAT = 28.825583;
-    private final double TMU_LNG = 78.657610;
-
     Marker mm;
-
-
-    private boolean mLocationPermissionGranted;
-    public static final int PERMISSION_REQUEST_CODE = 9001;
-    private final int PLAY_SERVICES_ERROR_CODE = 9002;
-
-    private FusedLocationProviderClient mLocationClient;
-
     DrawerLayout mNavDrawer;
-    // ViewFlipper viewFlipper;
-   // private RecyclerView recyclerView,recyclerView1,recyclerView2;
-    private ArrayList<MainModel> mainModels;
     ArrayList<Order> al1;
     ArrayList<Food> al2;
-    private MainAdapter mainAdapter;
-    RecyclerView.Adapter<OrderAdapter.OrderViewHolder>adapter1;
+    RecyclerView.Adapter<OrderAdapter.OrderViewHolder> adapter1;
     RecyclerView.Adapter<Foodmenu.FoodViewHolder> adapter2;
     TextView textView;
     Location location;
-
-    TextView txtName,txtEmail;
-
+    TextView txtName, txtEmail;
     ProgressDialog progressDialog;
     ViewPager viewPager;
+    private DatabaseReference databaseReference2;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
+    private Button mLogoutBtn;
+    private boolean mLocationPermissionGranted;
+    private FusedLocationProviderClient mLocationClient;
+    // ViewFlipper viewFlipper;
+    // private RecyclerView recyclerView,recyclerView1,recyclerView2;
+    private ArrayList<MainModel> mainModels;
+    private MainAdapter mainAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
 
-        viewPager=findViewById(R.id.view_pager);
-        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(this);
+        viewPager = findViewById(R.id.view_pager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager.setAdapter(viewPagerAdapter);
 
-        Timer timer=new Timer();
-        timer.scheduleAtFixedRate(new MyTimeTask(),200,4000);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new MyTimeTask(), 200, 4000);
 
 
         // progressDialog = new ProgressDialog(MainActivity.this);
@@ -136,29 +112,30 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView=findViewById(R.id.Recyclerview);
-        termModelArrayList=new ArrayList<>();
+        recyclerView = findViewById(R.id.Recyclerview);
+        termModelArrayList = new ArrayList<>();
 
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        firebaseDatabase2=FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/");
-        databaseReference2=firebaseDatabase2.getReference();
+        firebaseDatabase2 = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/");
+        databaseReference2 = firebaseDatabase2.getReference();
 
-        storageReference= FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               // progressDialog.dismiss();
-                for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                    TermModel termModel=dataSnapshot1.getValue(TermModel.class);
+                // progressDialog.dismiss();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    TermModel termModel = dataSnapshot1.getValue(TermModel.class);
                     termModelArrayList.add(termModel);
                 }
-                termAdapter=new TermAdapter(MainActivity.this,termModelArrayList);
-                recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this,3));
+                termAdapter = new TermAdapter(MainActivity.this, termModelArrayList);
+                recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
                 recyclerView.setAdapter(termAdapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -185,26 +162,26 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 Toast.makeText(MainActivity.this, "not Found permission", Toast.LENGTH_SHORT).show();
             }
         }
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
-                    case  R.id.dashboard1:
-                        startActivity(new Intent(getApplicationContext(),Dashboard.class));
-                        overridePendingTransition(0,0);
+                    case R.id.dashboard1:
+                        startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                        overridePendingTransition(0, 0);
                         finish();
                         return true;
 
-                    case  R.id.home:
+                    case R.id.home:
                         return true;
 
-                    case  R.id.about:
-                        startActivity(new Intent(getApplicationContext(),About.class));
-                        overridePendingTransition(0,0);
+                    case R.id.about:
+                        startActivity(new Intent(getApplicationContext(), About.class));
+                        overridePendingTransition(0, 0);
                         finish();
                         return true;
                 }
@@ -253,10 +230,10 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         // fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
         //fetchLocation();
 
-        Toolbar Drawertoolbar=findViewById(R.id.toolbar);
+        Toolbar Drawertoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(Drawertoolbar);
 
-        mNavDrawer=findViewById(R.id.drawer_layout);
+        mNavDrawer = findViewById(R.id.drawer_layout);
 
 
         //assign variable
@@ -267,9 +244,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         //create array
 
 
-
-       // int logo[]={R.drawable.img1,R.drawable.img2,R.drawable.img3
-         //       ,R.drawable.img4,R.drawable.img5};
+        // int logo[]={R.drawable.img1,R.drawable.img2,R.drawable.img3
+        //       ,R.drawable.img4,R.drawable.img5};
       /* for(int images: logo)
        {
            flipperImages(images);
@@ -332,21 +308,21 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         recyclerView2.setAdapter(adapter2);*/
 
         //navigation bar ka code
-        NavigationView navigationView=findViewById(R.id.navigation_view);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
 
 
-        viewHeader=navigationView.getHeaderView(0);
+        viewHeader = navigationView.getHeaderView(0);
 
 
-        firebaseDatabase=FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
-        txtEmail=viewHeader.findViewById(R.id.headeremail);
-        txtName=viewHeader.findViewById(R.id.headername);
+        txtEmail = viewHeader.findViewById(R.id.headeremail);
+        txtName = viewHeader.findViewById(R.id.headername);
 
-        mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         try {
 
-            databaseReference=FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
+            databaseReference = FirebaseDatabase.getInstance().getReference("UserProfile").child(mCurrentUser.getUid());
 
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -356,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                         String email = dataSnapshot.child("email").getValue().toString();
                         txtName.setText(name);
                         txtEmail.setText(email);
-                    }catch(Exception e){
+                    } catch (Exception e) {
 
                     }
                 }
@@ -366,13 +342,12 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
                 }
             });
-        }
-        catch (NullPointerException e){
-            Log.d("datanull","data"+e);
+        } catch (NullPointerException e) {
+            Log.d("datanull", "data" + e);
         }
 
-        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mNavDrawer,Drawertoolbar,
-                R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mNavDrawer, Drawertoolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         //add toggle button on toolbar
         mNavDrawer.addDrawerListener(toggle);
@@ -439,10 +414,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     @Override
     public void onBackPressed() {
-        if(mNavDrawer.isDrawerOpen(GravityCompat.START)){
+        if (mNavDrawer.isDrawerOpen(GravityCompat.START)) {
             mNavDrawer.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -450,49 +424,41 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.nav_my_account:
-            {
+        switch (item.getItemId()) {
+            case R.id.nav_my_account: {
                 //Toast.makeText(this, "jump", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, NewActivity.class));
                 break;
             }
-            case R.id.nav_help_and_support:
-            {
-                startActivity(new Intent(MainActivity.this,HelpAndSupport.class));
+            case R.id.nav_help_and_support: {
+                startActivity(new Intent(MainActivity.this, HelpAndSupport.class));
                 break;
             }
-            case R.id.nav_parking:
-            {
-                startActivity(new Intent(MainActivity.this,Parking_Display_Activity.class));
+            case R.id.nav_parking: {
+                startActivity(new Intent(MainActivity.this, Parking_Display_Activity.class));
                 break;
             }
-            case R.id.nav_orders:
-            {
-                startActivity(new Intent(MainActivity.this,Order_Display_Activity.class));
+            case R.id.nav_orders: {
+                startActivity(new Intent(MainActivity.this, Order_Display_Activity.class));
 
                 break;
             }
-            case R.id.nav_feedback:
-            {
-                startActivity(new Intent(MainActivity.this,Feedback.class));
+            case R.id.nav_feedback: {
+                startActivity(new Intent(MainActivity.this, Feedback.class));
                 break;
             }
-            case R.id.nav_sign_out:
-            {
+            case R.id.nav_sign_out: {
                 mAuth.signOut();
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 break;
             }
-            case R.id.nav_payment:
-            {
-                startActivity(new Intent(MainActivity.this,PayMent.class));
+            case R.id.nav_payment: {
+                startActivity(new Intent(MainActivity.this, PayMent.class));
 
                 break;
             }
-            case R.id.nav_refer:
-            {
-                startActivity(new Intent(MainActivity.this,Refer.class));
+            case R.id.nav_refer: {
+                startActivity(new Intent(MainActivity.this, Refer.class));
             }
         }
         mNavDrawer.closeDrawer(GravityCompat.START);
@@ -500,18 +466,17 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     }
 
 
-
     @Override
     protected void onStart() {
         super.onStart();
-       if(mCurrentUser == null){
+        if (mCurrentUser == null) {
             sendUserToLogin();
 
         }
     }
 
     private void sendUserToLogin() {
-        Intent loginIntent = new Intent(MainActivity.this,LoginActivity.class);
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
@@ -553,54 +518,51 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                         try {
                             String city = hereLocation(location.getLatitude(), location.getLongitude());
                             textView.setText(city);
-                        }catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this,"not Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "not Found", Toast.LENGTH_SHORT).show();
                         }
                         return;
                     }
-                }else{
-                    Toast.makeText(this,"Permission not granted !",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permission not granted !", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
         }
     }
 
-    private String hereLocation(double lat, double lon){
+    private String hereLocation(double lat, double lon) {
         String cityname = "";
-        Geocoder geocoder =  new Geocoder(this, Locale.getDefault());
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> addresses;
-        try{
-            addresses = geocoder.getFromLocation(lat,lon,10);
-            if(addresses.size()>0){
-                for (Address adr: addresses){
-                    if (adr.getAddressLine(0) != null && adr.getAddressLine(0).length() >0 ){
-                        cityname=adr.getAddressLine(0);
+        try {
+            addresses = geocoder.getFromLocation(lat, lon, 10);
+            if (addresses.size() > 0) {
+                for (Address adr : addresses) {
+                    if (adr.getAddressLine(0) != null && adr.getAddressLine(0).length() > 0) {
+                        cityname = adr.getAddressLine(0);
                         break;
                     }
                 }
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return cityname;
     }
 
-    public class MyTimeTask extends TimerTask{
+    public class MyTimeTask extends TimerTask {
         @Override
         public void run() {
             MainActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(viewPager.getCurrentItem()==0){
+                    if (viewPager.getCurrentItem() == 0) {
                         viewPager.setCurrentItem(1);
-                    }else if(viewPager.getCurrentItem()==1){
+                    } else if (viewPager.getCurrentItem() == 1) {
                         viewPager.setCurrentItem(2);
-                    }
-                    else{
+                    } else {
                         viewPager.setCurrentItem(0);
                     }
                 }

@@ -8,18 +8,18 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-class TermViewHolder  extends RecyclerView.ViewHolder {
-    TextView  desc;
+class TermViewHolder extends RecyclerView.ViewHolder {
+    TextView desc;
     ImageView imageView;
-    CardView cardView ;
+    CardView cardView;
 
-     TermViewHolder(@NonNull View itemView) {
+    TermViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        this.desc=itemView.findViewById(R.id.book_title_id);
-        this.imageView=itemView.findViewById(R.id.book_img_id);
-         cardView = (CardView) itemView.findViewById(R.id.cardview_id);
+        this.desc = itemView.findViewById(R.id.book_title_id);
+        this.imageView = itemView.findViewById(R.id.book_img_id);
+        cardView = itemView.findViewById(R.id.cardview_id);
 
 
-     }
+    }
 }

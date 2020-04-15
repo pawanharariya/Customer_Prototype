@@ -1,12 +1,9 @@
 package com.example.customer_prototype;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -26,20 +23,16 @@ public class Splashscreen extends AppCompatActivity {
         new MyThread().start();
     }
 
-    class MyThread extends Thread
-    {
+    class MyThread extends Thread {
         @Override
-        public void run()
-        {
+        public void run() {
             super.run();
             try {
                 Thread.sleep(2000);
-                Intent in=new Intent(Splashscreen.this, MainActivity.class);
+                Intent in = new Intent(Splashscreen.this, MainActivity.class);
                 startActivity(in);
                 finish();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
 
             }
         }

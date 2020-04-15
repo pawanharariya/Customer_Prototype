@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-   >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
@@ -21,9 +19,9 @@
             android:icon="@drawable/ic_location_on_black_24dp"
             android:title="Book Parking" />
         <item
-        android:id="@+id/nav_FAQs"
-        android:icon="@drawable/ic_poll_black_24dp"
-        android:title="FAQs" />
+            android:id="@+id/nav_FAQs"
+            android:icon="@drawable/ic_poll_black_24dp"
+            android:title="FAQs" />
 
         <item
             android:id="@+id/nav_payment"
@@ -39,9 +37,9 @@
                 android:icon="@drawable/ic_poll_black_24dp"
                 android:title="Feedback" />
             <item
-            android:id="@+id/nav_refer"
-            android:icon="@drawable/ic_share"
-            android:title="Refer and Earn" />
+                android:id="@+id/nav_refer"
+                android:icon="@drawable/ic_share"
+                android:title="Refer and Earn" />
 
             <item
                 android:id="@+id/nav_sign_out"

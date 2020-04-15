@@ -1,10 +1,5 @@
 package com.example.customer_prototype;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,12 +29,12 @@ import java.util.HashMap;
 
 public class NewActivity extends AppCompatActivity {
 
-    private EditText newUserName, newUserEmail, newUserCarNumber,newUserCarModel;
+    String name, email, carNumber, carModel;
+    int ImageBack = 1;
+    private EditText newUserName, newUserEmail, newUserCarNumber, newUserCarModel;
     private Button save;
     private ImageView updateProfilePic;
     private StorageReference storageReference;
-    String name,email,carNumber,carModel;
-    int ImageBack=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class NewActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference().child("ImageFolder");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("UserProfile").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Update");
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -88,10 +88,11 @@ public class NewActivity extends AppCompatActivity {
                     newUserEmail.setText(email);
                     newUserCarNumber.setText(carNumber);
                     newUserCarModel.setText(carModel);
-                }catch (Exception e){
-                    Log.d("MyAccountn","exception"+e);
+                } catch (Exception e) {
+                    Log.d("MyAccountn", "exception" + e);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -99,21 +100,21 @@ public class NewActivity extends AppCompatActivity {
     }
 
 
-    public void  choseImage(View view){
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+    public void choseImage(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent,ImageBack);
+        startActivityForResult(intent, ImageBack);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==ImageBack){
-            if(resultCode==RESULT_OK){
-                Uri ImageData=data.getData();
+        if (requestCode == ImageBack) {
+            if (resultCode == RESULT_OK) {
+                Uri ImageData = data.getData();
 
-                final StorageReference Imagename= storageReference.child("image"+ImageData.getLastPathSegment());
+                final StorageReference Imagename = storageReference.child("image" + ImageData.getLastPathSegment());
 
                 Imagename.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -122,9 +123,9 @@ public class NewActivity extends AppCompatActivity {
                         Imagename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                DatabaseReference imagestore=FirebaseDatabase.getInstance().getReference().child("Image").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                DatabaseReference imagestore = FirebaseDatabase.getInstance().getReference().child("Image").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                                HashMap<String,String> hashMap=new HashMap<>();
+                                HashMap<String, String> hashMap = new HashMap<>();
                                 hashMap.put("image", String.valueOf(uri));
 
                                 imagestore.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {

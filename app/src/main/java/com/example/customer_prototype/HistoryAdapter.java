@@ -1,8 +1,6 @@
 package com.example.customer_prototype;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends RecyclerView.Adapter<MyHistory>  {
+public class HistoryAdapter extends RecyclerView.Adapter<MyHistory> {
 
     Context c;
     ArrayList<HistoryModel> history;
@@ -26,7 +24,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<MyHistory>  {
     @NonNull
     @Override
     public MyHistory onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history,null);//this line inflate our row
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history, null);//this line inflate our row
         return new MyHistory(view);//this will return our view to holder classreturn null;
     }
 

@@ -1,9 +1,8 @@
 package com.example.customer_prototype;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class NearstFoodActivity extends AppCompatActivity {
 
@@ -12,7 +11,6 @@ public class NearstFoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearst_food);
-
 
 
     }

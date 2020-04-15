@@ -23,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/design_default_color_primary_dark"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp">
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
 
         <ToggleButton
             android:id="@+id/toggleButton"
@@ -42,8 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/toggleButton"
             android:layout_toStartOf="@id/linearButtons"
+            android:layout_toEndOf="@id/toggleButton"
             android:orientation="vertical">
 
             <TextView
@@ -69,21 +69,21 @@
             android:id="@+id/linearButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:orientation="horizontal">
 
 
             <Button
+                android:id="@+id/btnSort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:id="@+id/btnSort"
-                android:textStyle="bold"
                 android:background="@null"
-               android:text="Sort" />
+                android:text="Sort"
+                android:textColor="#000"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -98,7 +98,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
 </LinearLayout>

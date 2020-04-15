@@ -3,19 +3,17 @@
 
     <item
         android:id="@+id/home"
-        android:title="Home"
         android:icon="@drawable/home"
-        ></item>
+        android:title="Home"></item>
 
     <item
         android:id="@+id/dashboard1"
-        android:title="Wallet"
         android:icon="@drawable/ic_account_balance_wallet_black_24dp"
-        ></item>
+        android:title="Wallet"></item>
 
     <item
         android:id="@+id/about"
-        android:title="Stores"
-        android:icon="@drawable/ic_local_grocery"></item>
+        android:icon="@drawable/ic_local_grocery"
+        android:title="Stores"></item>
 
 </menu>

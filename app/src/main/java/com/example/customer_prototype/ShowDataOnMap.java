@@ -1,11 +1,9 @@
 package com.example.customer_prototype;
 
-import java.util.Comparator;
-
 public class ShowDataOnMap {
 
-    String Name,ShopName,email,genre;
-    double Latitude,Longitude;
+    String Name, ShopName, email, genre;
+    double Latitude, Longitude;
 
     public ShowDataOnMap() {
     }

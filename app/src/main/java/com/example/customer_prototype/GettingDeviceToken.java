@@ -1,8 +1,5 @@
 package com.example.customer_prototype;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -15,7 +12,7 @@ public class GettingDeviceToken extends FirebaseMessagingService {
     public void onNewToken(String s) {
         super.onNewToken(s);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d("NEW_TOKEN",s);
+        Log.d("NEW_TOKEN", s);
     }
 
     @Override

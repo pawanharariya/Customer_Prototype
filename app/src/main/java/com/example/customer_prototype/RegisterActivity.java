@@ -1,8 +1,5 @@
 package com.example.customer_prototype;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText name,email,CarModel,CarColor,CarNumber;
+    EditText name, email, CarModel, CarColor, CarNumber;
     Button saveBtn;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -47,19 +47,19 @@ public class RegisterActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name.getText().toString().isEmpty()||email.getText().toString().isEmpty() || CarColor.getText().toString().isEmpty()
-                    || CarModel.getText().toString().isEmpty() || CarNumber.getText().toString().isEmpty()){
+                if (name.getText().toString().isEmpty() || email.getText().toString().isEmpty() || CarColor.getText().toString().isEmpty()
+                        || CarModel.getText().toString().isEmpty() || CarNumber.getText().toString().isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Fill the required Details", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 DocumentReference docRef = fStore.collection("users").document(userID);
-                Map<String,Object> user = new HashMap<>();
-                user.put("Name",name.getText().toString());
-                user.put("Email",email.getText().toString());
-                user.put("CarModel",CarModel.getText().toString());
-                user.put("CarNumber",CarNumber.getText().toString());
-                user.put("CarColor",CarColor.getText().toString());
+                Map<String, Object> user = new HashMap<>();
+                user.put("Name", name.getText().toString());
+                user.put("Email", email.getText().toString());
+                user.put("CarModel", CarModel.getText().toString());
+                user.put("CarNumber", CarNumber.getText().toString());
+                user.put("CarColor", CarColor.getText().toString());
 
 
                 //add user to database

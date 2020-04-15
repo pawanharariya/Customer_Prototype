@@ -52,7 +52,7 @@ public class Order_DataViewHolder extends RecyclerView.Adapter<Order_DataViewHol
     @Override
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
         Order_DataSetFirebase orderDataSetFirebase = orderDataSetFirebaseList.get(position);
-        holder.shop.setText("Shop : "+orderDataSetFirebase.shop);
+        holder.shop.setText("Shop : " + orderDataSetFirebase.shop);
         holder.date.setText("Date : " + orderDataSetFirebase.date);
         holder.status.setText("Status : " + orderDataSetFirebase.status);
         holder.orderid.setText("ID : " + orderDataSetFirebase.orderid);
@@ -63,11 +63,11 @@ public class Order_DataViewHolder extends RecyclerView.Adapter<Order_DataViewHol
             public void onClick(View v) {
 
                 Intent intent = new Intent(mCtx, Order_Information_Activity.class);
-                intent.putExtra("shop",orderDataSetFirebase.shop);
-                intent.putExtra("date",orderDataSetFirebase.date);
-                intent.putExtra("status",orderDataSetFirebase.status);
-                intent.putExtra("orderid",orderDataSetFirebase.orderid);
-                intent.putExtra("profile",orderDataSetFirebase.profile);
+                intent.putExtra("shop", orderDataSetFirebase.shop);
+                intent.putExtra("date", orderDataSetFirebase.date);
+                intent.putExtra("status", orderDataSetFirebase.status);
+                intent.putExtra("orderid", orderDataSetFirebase.orderid);
+                intent.putExtra("profile", orderDataSetFirebase.profile);
                 mCtx.startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class Order_DataViewHolder extends RecyclerView.Adapter<Order_DataViewHol
     }
 
     class ArtistViewHolder extends RecyclerView.ViewHolder {
-        public TextView shop,date,orderid,status;
+        public TextView shop, date, orderid, status;
         public CardView cardView;
         public LinearLayout linearLayout;
         public CircleImageView profile;

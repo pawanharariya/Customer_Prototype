@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="115dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="10dp"
-    app:cardCornerRadius="15dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginTop="7dp"
     android:layout_marginLeft="20dp"
+    android:layout_marginTop="7dp"
     android:layout_marginRight="20dp"
-    android:id="@+id/card_view">
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp">
+
     <LinearLayout
+        android:id="@+id/linear_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000"
-        android:orientation="horizontal"
-        android:id="@+id/linear_lay">
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:layout_margin="15dp"/>
+            android:layout_margin="15dp" />
+
         <LinearLayout
             android:id="@+id/linear_mid"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/shop_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
+                android:layout_margin="5dp"
                 android:text="Shop Name"
-                android:layout_margin="5dp"
-                android:textSize="12sp"
+                android:textAllCaps="true"
                 android:textColor="#FFFFFF"
-                android:id="@+id/shop_id"/>
+                android:textSize="12sp" />
+
             <TextView
+                android:id="@+id/email_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textSize="12sp"
                 android:text="Email"
                 android:textAllCaps="true"
                 android:textColor="#FFFFFF"
-                android:id="@+id/email_id"/>
+                android:textSize="12sp" />
+
             <TextView
+                android:id="@+id/name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textAllCaps="true"
-                android:textSize="12sp"
                 android:text="name"
+                android:textAllCaps="true"
                 android:textColor="#FFFFFF"
-                android:id="@+id/name_id"/>
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/genre_id"
-                android:layout_margin="5dp"
-                android:textAllCaps="true"
-                android:textSize="12sp"
-                android:textColor="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Genre"/>
+                android:layout_margin="5dp"
+                android:text="Genre"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>

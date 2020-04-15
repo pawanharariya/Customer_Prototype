@@ -1,16 +1,13 @@
 package com.example.customer_prototype;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Refer extends AppCompatActivity {
 
@@ -18,7 +15,7 @@ public class Refer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refer);
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Refer");
 
         Button know_more = findViewById(R.id.knowmore_btn);
@@ -28,13 +25,21 @@ public class Refer extends AppCompatActivity {
 
     }
 
-    public class Click implements View.OnClickListener{
+    public void share() {
+        Intent share_intent = new Intent();
+        share_intent.setAction(Intent.ACTION_SEND);
+        share_intent.putExtra(Intent.EXTRA_TEXT, "Play store Link has to be provide here. Thank You!");
+        share_intent.setType("text/plain");
+        startActivity(Intent.createChooser(share_intent, "share via"));
+    }
+
+    public class Click implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
 
                 case R.id.knowmore_btn:
-                    Intent intent = new Intent(Refer.this,Refer_Info.class);
+                    Intent intent = new Intent(Refer.this, Refer_Info.class);
                     startActivity(intent);
                     break;
                 case R.id.linearLayout:
@@ -45,13 +50,5 @@ public class Refer extends AppCompatActivity {
 
             }
         }
-    }
-    public void share()
-    {
-        Intent share_intent = new Intent();
-        share_intent.setAction(Intent.ACTION_SEND);
-        share_intent.putExtra(Intent.EXTRA_TEXT,"Play store Link has to be provide here. Thank You!");
-        share_intent.setType("text/plain");
-        startActivity(Intent.createChooser(share_intent,"share via"));
     }
 }

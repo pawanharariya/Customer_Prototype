@@ -13,8 +13,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Order_Information_Activity extends Activity {
 
-    TextView shop_id,date_id,status_id,order_id;
+    TextView shop_id, date_id, status_id, order_id;
     CircleImageView profile_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +34,11 @@ public class Order_Information_Activity extends Activity {
         date_id = findViewById(R.id.date_id);
         profile_id = findViewById(R.id.imageView);
 
-        shop_id.setText("Shop : "+shop);
-        date_id.setText("Date : "+date);
-        status_id.setText("Status : "+status);
-        order_id.setText("Order ID : "+order);
+        shop_id.setText("Shop : " + shop);
+        date_id.setText("Date : " + date);
+        status_id.setText("Status : " + status);
+        order_id.setText("Order ID : " + order);
         Picasso.get().load(profile).into(profile_id);
-
-
-
 
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -54,7 +52,7 @@ public class Order_Information_Activity extends Activity {
         params.gravity = Gravity.CENTER;
         params.x = 0;
         params.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-        params.dimAmount=0.7f;
+        params.dimAmount = 0.7f;
         params.y = -20;
 
         getWindow().setAttributes(params);

@@ -8,42 +8,35 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DownloadUrl
-{
-    public String ReadTheURL(String placeURL) throws IOException
-    {
-        String Data="";
-        InputStream inputStream=null;
-        HttpURLConnection httpURLConnection=null;
+public class DownloadUrl {
+    public String ReadTheURL(String placeURL) throws IOException {
+        String Data = "";
+        InputStream inputStream = null;
+        HttpURLConnection httpURLConnection = null;
 
-        try
-        {
-            URL url=new URL(placeURL);
-            httpURLConnection=(HttpURLConnection) url.openConnection();
+        try {
+            URL url = new URL(placeURL);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.connect();
 
-            inputStream=httpURLConnection.getInputStream();
-            BufferedReader bufferedReader=new BufferedReader(new BufferedReader(new InputStreamReader(inputStream)));
-            StringBuffer stringBuffer=new StringBuffer();
+            inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new BufferedReader(new InputStreamReader(inputStream)));
+            StringBuffer stringBuffer = new StringBuffer();
 
-            String line="";
+            String line = "";
 
-            while ((line=bufferedReader.readLine())!=null)
-            {
+            while ((line = bufferedReader.readLine()) != null) {
                 stringBuffer.append(line);
             }
 
-            Data=stringBuffer.toString();
+            Data = stringBuffer.toString();
             bufferedReader.close();
 
-        } catch (MalformedURLException e)
-        {
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             inputStream.close();
             httpURLConnection.connect();
         }

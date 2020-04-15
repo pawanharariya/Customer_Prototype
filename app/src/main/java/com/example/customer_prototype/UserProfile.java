@@ -8,14 +8,6 @@ public class UserProfile {
     String userCarNumber;
     String userCarModel;
 
-    public String getUserImage() {
-        return userImage;
-    }
-
-    public void setUserImage(String userImage) {
-        this.userImage = userImage;
-    }
-
     public UserProfile() {
     }
 
@@ -24,6 +16,14 @@ public class UserProfile {
         this.userEmail = userEmail;
         this.userCarNumber = userCarNumber;
         this.userCarModel = userCarModel;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     public String getUserName() {

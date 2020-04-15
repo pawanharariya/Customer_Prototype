@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    >
+    android:orientation="vertical">
 
     <EditText
+        android:id="@+id/fetch_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fetch_name"
         android:hint="Name" />
 
     <EditText
+        android:id="@+id/fetch_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fetch_email"
         android:hint="Email" />
 
     <EditText
+        android:id="@+id/fetch_shop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fetch_shop"
         android:hint="Shop Name" />
 
     <EditText
+        android:id="@+id/fetch_genre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fetch_genre"
         android:hint="Genre" />
 
     <EditText
+        android:id="@+id/fetch_long"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fetch_long"
         android:hint="Longitude" />
 
     <EditText
+        android:id="@+id/fetch_lati"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fetch_lati"
         android:hint="Latitude" />
-
-
 
 
 </LinearLayout>

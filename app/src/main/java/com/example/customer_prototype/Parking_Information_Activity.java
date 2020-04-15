@@ -16,9 +16,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Parking_Information_Activity extends Activity {
 
-    TextView shop_id,name_id,genre_id,email_id;
+    TextView shop_id, name_id, genre_id, email_id;
     Button book_park;
     CircleImageView profile_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class Parking_Information_Activity extends Activity {
         genre_id = findViewById(R.id.genre_id);
         profile_id = findViewById(R.id.imageView);
         book_park = findViewById(R.id.book_park);
-        book_park.setOnClickListener(new View.OnClickListener(){
+        book_park.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -45,14 +46,11 @@ public class Parking_Information_Activity extends Activity {
         String genre = getIntent().getStringExtra("genre");
         String image = getIntent().getStringExtra("image");
 
-        shop_id.setText("Shop : "+shop);
-        name_id.setText("Name : "+name);
-        genre_id.setText("Genre : "+genre);
-        email_id.setText("Email : "+email);
+        shop_id.setText("Shop : " + shop);
+        name_id.setText("Name : " + name);
+        genre_id.setText("Genre : " + genre);
+        email_id.setText("Email : " + email);
         Picasso.get().load(image).into(profile_id);
-
-
-
 
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -66,7 +64,7 @@ public class Parking_Information_Activity extends Activity {
         params.gravity = Gravity.CENTER;
         params.x = 0;
         params.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-        params.dimAmount=0.7f;
+        params.dimAmount = 0.7f;
         params.y = -20;
 
         getWindow().setAttributes(params);

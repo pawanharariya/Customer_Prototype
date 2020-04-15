@@ -1,8 +1,5 @@
 package com.example.customer_prototype;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
@@ -32,12 +32,11 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
 
     EditText et_Amount;
     Button payment;
-    private CodeScanner codeScanner;
-    private CodeScannerView scannerView;
     TextView resultData;
-
     float amount;
     Button back;
+    private CodeScanner codeScanner;
+    private CodeScannerView scannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +44,9 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
         setContentView(R.layout.activity_pay_ment);
 
 
-
-        scannerView=findViewById(R.id.scanner_view);
-        codeScanner=new CodeScanner(this,scannerView);
-        resultData=findViewById(R.id.resultQr);
+        scannerView = findViewById(R.id.scanner_view);
+        codeScanner = new CodeScanner(this, scannerView);
+        resultData = findViewById(R.id.resultQr);
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -69,9 +67,9 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
         });
 
 
-        et_Amount=findViewById(R.id.enterAmount);
-        payment=findViewById(R.id.btnPay);
-        back=findViewById(R.id.back_btn);
+        et_Amount = findViewById(R.id.enterAmount);
+        payment = findViewById(R.id.btnPay);
+        back = findViewById(R.id.back_btn);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,10 +81,9 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(et_Amount.getText().toString().isEmpty()){
+                if (et_Amount.getText().toString().isEmpty()) {
                     Toast.makeText(PayMent.this, "Enter Payment", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     amount = Integer.parseInt(et_Amount.getText().toString().trim());
                     amount = amount * 100;
 
@@ -95,23 +92,23 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
             }
         });
     }
+
     private void startPayment(float amount) {
 
-        Checkout checkout=new Checkout();
+        Checkout checkout = new Checkout();
         //set Logo
         //  checkout.setImage(R.drawable.ic_launcher_background);
         ////reference current object
-        final Activity activity=this;
-        try{
-            JSONObject options=new JSONObject();
-            options.put("name","Anvay Technosolution Pvt. Ltd.");
-            options.put("description","BnYnMHMUCcHvy5");
-            options.put("currency","INR");
-            options.put("amount",amount);
-            checkout.open(activity,options);
-        }
-        catch(Exception e){
-            Log.d("Error",e.toString());
+        final Activity activity = this;
+        try {
+            JSONObject options = new JSONObject();
+            options.put("name", "Anvay Technosolution Pvt. Ltd.");
+            options.put("description", "BnYnMHMUCcHvy5");
+            options.put("currency", "INR");
+            options.put("amount", amount);
+            checkout.open(activity, options);
+        } catch (Exception e) {
+            Log.d("Error", e.toString());
         }
 
     }
@@ -136,13 +133,18 @@ public class PayMent extends AppCompatActivity implements PaymentResultListener 
         Dexter.withActivity(this)
                 .withPermission(Manifest.permission.CAMERA)
                 .withListener(new PermissionListener() {
-                    @Override public void onPermissionGranted(PermissionGrantedResponse response) {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
                         codeScanner.startPreview();
                     }
-                    @Override public void onPermissionDenied(PermissionDeniedResponse response) {
-                        Toast.makeText(PayMent.this, "Camera permision is required", Toast.LENGTH_SHORT).show();
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        Toast.makeText(PayMent.this, "Camera permission is required", Toast.LENGTH_SHORT).show();
                     }
-                    @Override public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
                 }).check();

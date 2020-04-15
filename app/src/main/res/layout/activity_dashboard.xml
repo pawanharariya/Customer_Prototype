@@ -1,61 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarWallet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbarWallet"
-        android:background="@color/greencolor"
-        >
+        android:background="@color/greencolor">
 
         <ImageView
+            android:id="@+id/imageScanner"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/imageScanner"
             android:src="@drawable/qrcode"
 
 
-></ImageView>
+            ></ImageView>
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:id="@+id/layout1"
         android:layout_below="@+id/toolbarWallet"
-        >
+        android:layout_marginTop="20dp"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="120dp"
             android:gravity="center"
             android:text="TOTAL BALANCE"
             android:textColor="@color/greencolor"
-            android:textStyle="normal"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="120dp"
-            >
+            android:textStyle="normal">
 
         </TextView>
+
         <TextView
             android:id="@+id/rupee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/total"
             android:gravity="center"
             android:text="$0.00"
-            android:textSize="40sp"
-            android:layout_below="@+id/total"
-            android:textStyle="normal"
             android:textColor="@color/greencolor"
-            ></TextView>
+            android:textSize="40sp"
+            android:textStyle="normal"></TextView>
 
 
         <TextView
@@ -64,38 +59,36 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rupee"
             android:layout_marginLeft="70dp"
-            android:text="$0.00"
-            android:textSize="22sp"
             android:layout_marginTop="20dp"
-            android:textStyle="normal"
+            android:text="$0.00"
             android:textColor="@color/greencolor"
-            ></TextView>
+            android:textSize="22sp"
+            android:textStyle="normal"></TextView>
 
         <TextView
+            android:id="@+id/hold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rupee1"
-            android:textSize="15sp"
-            android:id="@+id/hold"
-            android:textStyle="normal"
-            android:text="HOLD BALANCE"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
+            android:text="HOLD BALANCE"
             android:textColor="@color/greencolor"
-            android:layout_marginLeft="32dp"></TextView>
+            android:textSize="15sp"
+            android:textStyle="normal"></TextView>
 
         <TextView
             android:id="@+id/rupee2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rupee"
-            android:layout_marginLeft="170dp"
             android:layout_alignLeft="@+id/rupee1"
-            android:text="$0.00"
-            android:textSize="22sp"
+            android:layout_marginLeft="170dp"
             android:layout_marginTop="20dp"
-            android:textStyle="normal"
+            android:text="$0.00"
             android:textColor="@color/greencolor"
-            ></TextView>
+            android:textSize="22sp"
+            android:textStyle="normal"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,39 +96,38 @@
             android:layout_below="@+id/rupee1"
             android:layout_alignLeft="@+id/hold"
 
-            android:textSize="15sp"
-            android:textStyle="normal"
-            android:text="AVAILABLE BALANCE"
+            android:layout_marginLeft="170dp"
             android:layout_marginTop="8dp"
+            android:text="AVAILABLE BALANCE"
             android:textColor="@color/greencolor"
-            android:layout_marginLeft="170dp"></TextView>
+            android:textSize="15sp"
+            android:textStyle="normal"></TextView>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/layout1"
+        android:layout_height="100dp"
 
-        android:layout_marginTop="20dp"
-        android:layout_height="100dp">
+        android:layout_below="@+id/layout1"
+        android:layout_marginTop="20dp">
 
         <Button
             android:id="@+id/btnPay"
             android:layout_width="280dp"
-            android:gravity="center"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="30dp"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/joinbtn"
+            android:gravity="center"
             android:text="PAY MONEY"
             android:textAllCaps="false"
-            android:background="@drawable/joinbtn"
-            android:textColor="@color/whitecolor"/>
+            android:textColor="@color/whitecolor" />
 
 
     </RelativeLayout>
-
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

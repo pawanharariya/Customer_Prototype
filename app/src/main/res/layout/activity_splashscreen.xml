@@ -2,34 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="#fff"
-    tools:context=".MainActivity"
-    >
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        app:lottie_fileName="splash.json"
         app:lottie_autoPlay="true"
+        app:lottie_fileName="splash.json"
         app:lottie_loop="true">
 
     </com.airbnb.lottie.LottieAnimationView>
 
 
-<!--
-        <pl.droidsonroids.gif.GifImageView
+    <!--
+            <pl.droidsonroids.gif.GifImageView
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/splash"
-            android:id="@+id/splash_screen"
-            >
-        </pl.droidsonroids.gif.GifImageView>
--->
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/splash"
+                android:id="@+id/splash_screen"
+                >
+            </pl.droidsonroids.gif.GifImageView>
+    -->
 
 
 </LinearLayout>

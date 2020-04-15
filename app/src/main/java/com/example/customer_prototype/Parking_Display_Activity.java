@@ -25,50 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parking_Display_Activity extends AppCompatActivity {
-    Button btnActive,btnCancel,btnHistory;
+    Button btnActive, btnCancel, btnHistory;
+    DatabaseReference dbArtists;
     private RecyclerView recyclerView;
     private Parking_DataViewHolder adapter;
     private List<Parking_DataSetFirebase> parkingDataSetFirebaseList;
-
-    DatabaseReference dbArtists;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.book_park_menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.park_scan)
-        {
-            Intent intent = new Intent(this,PayMent.class);
-            startActivity(intent);
-        }
-        return true;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parking_display);
-
-        recyclerView = findViewById(R.id.Recyclerview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        parkingDataSetFirebaseList = new ArrayList<>();
-        adapter = new Parking_DataViewHolder(this, parkingDataSetFirebaseList);
-        recyclerView.setAdapter(adapter);
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.setTitle("Book Parking");
-        
-        //1. SELECT * FROM Artists
-        dbArtists = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/").getReference();
-        Query que = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/").getReference();
-        que.addListenerForSingleValueEvent(valueEventListener);
-    }
-
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -88,10 +49,46 @@ public class Parking_Display_Activity extends AppCompatActivity {
         }
     };
 
-    public class Click implements View.OnClickListener{
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.book_park_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.park_scan) {
+            Intent intent = new Intent(this, PayMent.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_parking_display);
+
+        recyclerView = findViewById(R.id.Recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        parkingDataSetFirebaseList = new ArrayList<>();
+        adapter = new Parking_DataViewHolder(this, parkingDataSetFirebaseList);
+        recyclerView.setAdapter(adapter);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Book Parking");
+
+        //1. SELECT * FROM Artists
+        dbArtists = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/").getReference();
+        Query que = FirebaseDatabase.getInstance("https://customerprototype-29375-fbcfa.firebaseio.com/").getReference();
+        que.addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    public class Click implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 default:
 
             }

@@ -1,74 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:id="@+id/cordnaor"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/account_wall"
-    tools:context=".Feedback"
-    >
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Feedback">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        >
+        android:layout_marginTop="5dp">
 
         <Button
             android:layout_width="30dp"
             android:layout_height="30dp"
 
-            android:background="@drawable/backicon"/>
+            android:background="@drawable/backicon" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
-            android:textSize="30sp"
-            android:textColorHint="#A1FFFFFF"
+            android:hint="Feedback"
             android:textAlignment="center"
-            android:hint="Feedback" />
+            android:textColorHint="#A1FFFFFF"
+            android:textSize="30sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <EditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/email"
-            android:layout_marginTop="-50dp"
             android:layout_gravity="center"
+            android:layout_marginTop="-50dp"
+            android:hint="Email"
             android:textColor="#FFF"
-            android:textColorHint="#A1FFFFFF"
-            android:hint="Email"/>
+            android:textColorHint="#A1FFFFFF" />
+
         <EditText
+            android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:id="@+id/message"
             android:ems="15"
+            android:hint="Message"
             android:textColor="#FFF"
-            android:textColorHint="#A1FFFFFF"
-            android:hint="Message"/>
+            android:textColorHint="#A1FFFFFF" />
+
         <Button
+            android:id="@+id/btnfeed"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btnfeed"
-            android:layout_marginTop="80dp"
             android:layout_gravity="center"
-            android:text="Send Feedback"
-            android:textColor="#FFF"
+            android:layout_marginTop="80dp"
             android:background="@drawable/loginbar"
-            android:onClick="feedbacksent"/>
-
+            android:onClick="feedbacksent"
+            android:text="Send Feedback"
+            android:textColor="#FFF" />
 
 
     </LinearLayout>

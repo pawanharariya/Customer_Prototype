@@ -1,11 +1,8 @@
 package com.example.customer_prototype;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -24,7 +21,7 @@ public class AnotherActivity extends AppCompatActivity implements OnMapReadyCall
     //TextView mTitleTv,mDescTv;
     //ImageView mImageIv;
 
-    TextView latitude,longitude,name,shopName,email,genre;
+    TextView latitude, longitude, name, shopName, email, genre;
     GoogleMap mMap;
     String mLatitude;
     String mLongitude;
@@ -40,46 +37,46 @@ public class AnotherActivity extends AppCompatActivity implements OnMapReadyCall
 
         //in this activity we will use a back button
 
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
 
 
-        SupportMapFragment mapFragment=(SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map1);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map1);
 
         mapFragment.getMapAsync(this::onMapReady);
 
-         latitude=findViewById(R.id.latitude);
-         longitude=findViewById(R.id.longitude);
-         name=findViewById(R.id.name);
-         shopName=findViewById(R.id.shopname);
-         email=findViewById(R.id.email);
-         genre=findViewById(R.id.genre);
+        latitude = findViewById(R.id.latitude);
+        longitude = findViewById(R.id.longitude);
+        name = findViewById(R.id.name);
+        shopName = findViewById(R.id.shopname);
+        email = findViewById(R.id.email);
+        genre = findViewById(R.id.genre);
 
         /* now get our data from intent in which we put our data */
 
-        Intent intent=getIntent();
+        Intent intent = getIntent();
 
-        mLatitude=intent.getStringExtra("latitude");
-        mLongitude=intent.getStringExtra("longitude");
+        mLatitude = intent.getStringExtra("latitude");
+        mLongitude = intent.getStringExtra("longitude");
 
-        Log.d("mlatitude","lat"+mLatitude);
-        Log.d("mlongitude","lag"+mLongitude);
-        mNamme=intent.getStringExtra("name");
-        mShopName=intent.getStringExtra("shopname");
+        Log.d("mlatitude", "lat" + mLatitude);
+        Log.d("mlongitude", "lag" + mLongitude);
+        mNamme = intent.getStringExtra("name");
+        mShopName = intent.getStringExtra("shopname");
 
-        String mEmail=intent.getStringExtra("email");
-        mGenre=intent.getStringExtra("genre");
+        String mEmail = intent.getStringExtra("email");
+        mGenre = intent.getStringExtra("genre");
 
         //now decode image because from previous activity we get our image in bytes
-       // byte[] mBytes=getIntent().getByteArrayExtra("iImage");
+        // byte[] mBytes=getIntent().getByteArrayExtra("iImage");
 
         //Bitmap bitmap= BitmapFactory.decodeByteArray(mBytes,0,mBytes.length);
 
         //try {
-          //  actionBar.setTitle(mTitle);//which title we get previous activity that will set in our action bar
+        //  actionBar.setTitle(mTitle);//which title we get previous activity that will set in our action bar
         //}
         //catch(NullPointerException n){
-          //  Log.d("dikkat", "onCreate: "+n);
-       // }
+        //  Log.d("dikkat", "onCreate: "+n);
+        // }
         //now set our data in our view wgich we get in our previous activity
 
         latitude.setText(mLatitude);
@@ -92,14 +89,14 @@ public class AnotherActivity extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-           mMap=googleMap;
-           Double lat=Double.valueOf(mLatitude);
-           Double lag=Double.valueOf(mLongitude);
-           LatLng latLng=new LatLng(lat,lag);
-           mMap.addMarker(new MarkerOptions().position(latLng).title(mNamme+"::"+mShopName+"::"+mGenre));
-          CameraUpdate cameraUpdateFactory=CameraUpdateFactory.newLatLngZoom(latLng,16);
-          mMap.moveCamera(cameraUpdateFactory);
-           // mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-          // mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap = googleMap;
+        Double lat = Double.valueOf(mLatitude);
+        Double lag = Double.valueOf(mLongitude);
+        LatLng latLng = new LatLng(lat, lag);
+        mMap.addMarker(new MarkerOptions().position(latLng).title(mNamme + "::" + mShopName + "::" + mGenre));
+        CameraUpdate cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(latLng, 16);
+        mMap.moveCamera(cameraUpdateFactory);
+        // mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 }

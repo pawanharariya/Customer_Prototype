@@ -1,8 +1,8 @@
 package com.example.customer_prototype;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Refer_Info extends AppCompatActivity {
 
