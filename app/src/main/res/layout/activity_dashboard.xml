@@ -14,26 +14,24 @@
             android:id="@+id/imageScanner"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/qrcode"
-
-
-            ></ImageView>
+            android:src="@drawable/qrcode" />
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/toolbarWallet"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="66dp"
         android:gravity="center">
 
         <TextView
             android:id="@+id/total"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:gravity="center"
             android:text="TOTAL BALANCE"
             android:textColor="@color/greencolor"
@@ -42,78 +40,79 @@
         </TextView>
 
         <TextView
-            android:id="@+id/rupee"
+            android:id="@+id/user_balance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/total"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:gravity="center"
-            android:text="$0.00"
+            android:text="\u20B9 0"
             android:textColor="@color/greencolor"
             android:textSize="40sp"
             android:textStyle="normal"></TextView>
 
 
-        <TextView
-            android:id="@+id/rupee1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rupee"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="20dp"
-            android:text="$0.00"
-            android:textColor="@color/greencolor"
-            android:textSize="22sp"
-            android:textStyle="normal"></TextView>
+        <!--        <TextView-->
+        <!--            android:id="@+id/rupee1"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/rupee"-->
+        <!--            android:layout_marginLeft="70dp"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            android:text="$0.00"-->
+        <!--            android:textColor="@color/greencolor"-->
+        <!--            android:textSize="22sp"-->
+        <!--            android:textStyle="normal"></TextView>-->
 
-        <TextView
-            android:id="@+id/hold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rupee1"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:text="HOLD BALANCE"
-            android:textColor="@color/greencolor"
-            android:textSize="15sp"
-            android:textStyle="normal"></TextView>
+        <!--        <TextView-->
+        <!--            android:id="@+id/hold"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/rupee1"-->
+        <!--            android:layout_marginLeft="32dp"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:text="HOLD BALANCE"-->
+        <!--            android:textColor="@color/greencolor"-->
+        <!--            android:textSize="15sp"-->
+        <!--            android:textStyle="normal"></TextView>-->
 
-        <TextView
-            android:id="@+id/rupee2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rupee"
-            android:layout_alignLeft="@+id/rupee1"
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="20dp"
-            android:text="$0.00"
-            android:textColor="@color/greencolor"
-            android:textSize="22sp"
-            android:textStyle="normal"></TextView>
+        <!--        <TextView-->
+        <!--            android:id="@+id/rupee2"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/rupee"-->
+        <!--            android:layout_alignLeft="@+id/rupee1"-->
+        <!--            android:layout_marginLeft="170dp"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            android:text="$0.00"-->
+        <!--            android:textColor="@color/greencolor"-->
+        <!--            android:textSize="22sp"-->
+        <!--            android:textStyle="normal"></TextView>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rupee1"
-            android:layout_alignLeft="@+id/hold"
-
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="8dp"
-            android:text="AVAILABLE BALANCE"
-            android:textColor="@color/greencolor"
-            android:textSize="15sp"
-            android:textStyle="normal"></TextView>
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/rupee1"-->
+        <!--            android:layout_alignLeft="@+id/hold"-->
+        <!--            android:layout_marginLeft="170dp"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:text="AVAILABLE BALANCE"-->
+        <!--            android:textColor="@color/greencolor"-->
+        <!--            android:textSize="15sp"-->
+        <!--            android:textStyle="normal"></TextView>-->
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-
+        android:layout_height="wrap_content"
         android:layout_below="@+id/layout1"
         android:layout_marginTop="20dp">
 
         <Button
-            android:id="@+id/btnPay"
+            android:id="@+id/add_money"
             android:layout_width="280dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
@@ -122,10 +121,25 @@
             android:layout_marginRight="70dp"
             android:background="@drawable/joinbtn"
             android:gravity="center"
-            android:text="PAY MONEY"
+            android:text="ADD MONEY"
             android:textAllCaps="false"
-            android:textColor="@color/whitecolor" />
-
+            android:textColor="@color/whitecolor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_money"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="To continue ordering or booking, please maintain enough balance in your Wallet."
+            android:textColor="@color/greencolor"
+            android:textSize="12sp" />
 
     </RelativeLayout>
 
@@ -140,5 +154,8 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation"></com.google.android.material.bottomnavigation.BottomNavigationView>
-
+    <include
+        android:id="@+id/add_amount_dialog"
+        layout="@layout/dialog_add_amount"
+        android:visibility="gone" />
 </RelativeLayout>

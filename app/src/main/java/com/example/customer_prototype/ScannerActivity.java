@@ -31,8 +31,6 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
-
-
         scannerView = findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(this, scannerView);
         resultData = findViewById(R.id.resultQr);
@@ -44,7 +42,7 @@ public class ScannerActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         resultData.setText(result.getText());
-                    }
+                    } //TODO changes here
                 });
             }
         });

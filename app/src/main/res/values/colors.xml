@@ -17,4 +17,7 @@
     <color name="light_gray">#575050</color>
 
     <color name="fullwhite">#C6C6C6</color>
+
+    <color name="black">#000000</color>
+    <color name="transparent">#88000000</color>
 </resources>
