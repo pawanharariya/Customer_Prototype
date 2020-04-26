@@ -94,7 +94,7 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_sVrW5vtI3Nd2pZ" /> //TODO replace by live key
+            android:value="rzp_test_sVrW5vtI3Nd2pZ" />
 
         <uses-library
             android:name="org.apache.http.legacy"

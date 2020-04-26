@@ -1,6 +1,7 @@
 package com.example.customer_prototype;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //String country_code = mCountryCode.getText().toString();
                 String phone_number = mPhoneNumber.getText().toString();
-
                 String complete_phone_number = "+ " + "91" + phone_number;
 
                 if (phone_number.isEmpty()) {
@@ -97,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCodeSent(final String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
-
                 new android.os.Handler().postDelayed(
                         new Runnable() {
                             public void run() {
@@ -127,6 +126,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String userId = String.valueOf(task.getResult().getUser().getPhoneNumber());
+                            SharedPreferences sharedPreferences = getSharedPreferences("app",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("userId",userId);
+                            editor.commit();
                             sendUserToHome();
                             // ...
                         } else {

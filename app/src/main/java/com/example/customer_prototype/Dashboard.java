@@ -55,7 +55,8 @@ public class Dashboard extends AppCompatActivity implements PaymentResultListene
         setContentView(R.layout.activity_dashboard);
         loadUI();
         SharedPreferences sharedPreferences = getSharedPreferences("app",MODE_PRIVATE);
-        userId = sharedPreferences.getString("userId",null);
+        userId = sharedPreferences.getString("userId",null); //TODO the test should be replaced with null
+        Toast.makeText(this, "This is your userId"+ userId, Toast.LENGTH_SHORT).show();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("user_balance").document(userId);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -63,13 +64,13 @@ public class Dashboard extends AppCompatActivity implements PaymentResultListene
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
                     Toast.makeText(Dashboard.this, "Unknown Error", Toast.LENGTH_SHORT).show();
-                    Log.e("error",e.toString());
+                    Log.e("error", e.toString());
                     return;
                 }
-                if (documentSnapshot.exists())
+                if (documentSnapshot.exists()) {
                     currentAmount = (long) documentSnapshot.get("userBalance");
-                else
-                    Log.e("amount", "document doesn't exist");
+                    Toast.makeText(Dashboard.this, "user balance updated", Toast.LENGTH_SHORT).show();
+                }
                 userBalanceTextView.setText("\u20B9 " + currentAmount);
             }
         });

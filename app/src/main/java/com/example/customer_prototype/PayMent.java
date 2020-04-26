@@ -39,7 +39,6 @@ import java.util.Map;
 public class PayMent extends AppCompatActivity {
 
     EditText et_Amount;
-    CardView payment;
     long amount;
     Button back;
     Button pay;
@@ -55,7 +54,6 @@ public class PayMent extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
         customerId = sharedPreferences.getString("userId", null);
         et_Amount = findViewById(R.id.enterAmount);
-        payment = findViewById(R.id.btnPay);
         back = findViewById(R.id.back_btn);
         scannerView = findViewById(R.id.scanner_view);
         pay = findViewById(R.id.pay);
@@ -66,7 +64,6 @@ public class PayMent extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        payment.setVisibility(View.VISIBLE);
                         partnerId = result.getText();
                     }
                 });

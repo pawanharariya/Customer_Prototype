@@ -81,13 +81,13 @@ public class OtpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            sendUserToHome();
                             String userId = String.valueOf(task.getResult().getUser().getPhoneNumber());
                             SharedPreferences sharedPreferences = getSharedPreferences("app",MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("userId",userId);
-                            editor.commit(); //TODO to be stored in shared preferences
-                            // ...
+                            editor.commit();
+                            sendUserToHome();
+                             //TODO to be stored in shared preferences
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid

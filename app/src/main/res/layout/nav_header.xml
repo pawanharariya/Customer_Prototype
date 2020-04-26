@@ -33,8 +33,8 @@
             android:layout_marginTop="10dp"
             android:text="Customer Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#C51162"
-            android:textSize="14sp" />
+            android:textColor="#000"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -46,8 +46,8 @@
             android:layout_marginTop="10dp"
             android:text="Customer Email"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#C51162"
-            android:textSize="11sp"
+            android:textColor="#000"
+            android:textSize="13sp"
 
             />
 

@@ -2,19 +2,30 @@ package com.example.customer_prototype;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,6 +55,26 @@ public class Parking_DataViewHolder extends RecyclerView.Adapter<Parking_DataVie
         holder.name.setText("Name : " + parkingDataSetFirebase.Name);
         Picasso.get().load(parkingDataSetFirebase.Image).into(holder.profile);
         holder.linearLayout.setBackgroundResource(R.drawable.book_parking_card);
+        holder.bookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = mCtx.getSharedPreferences("app",Context.MODE_PRIVATE);
+                String userId = sharedPreferences.getString("userId",null);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference docRef =  db.collection("bookings").document();
+                Map<String,Object> data = new HashMap<>();
+                data.put("userId",userId);
+                data.put("time", FieldValue.serverTimestamp());
+                docRef.set(data)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                    Toast.makeText(mCtx, "Booked Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +100,7 @@ public class Parking_DataViewHolder extends RecyclerView.Adapter<Parking_DataVie
         public CardView cardView;
         public LinearLayout linearLayout;
         public CircleImageView profile;
-
+        public Button bookNow;
         public ArtistViewHolder(@NonNull View itemView) {
             super(itemView);
             shop = itemView.findViewById(R.id.shop_id);
@@ -79,6 +110,7 @@ public class Parking_DataViewHolder extends RecyclerView.Adapter<Parking_DataVie
             cardView = itemView.findViewById(R.id.card_view);
             linearLayout = itemView.findViewById(R.id.linear_lay);
             profile = itemView.findViewById(R.id.profile_image);
+            bookNow = itemView.findViewById(R.id.book_now);
         }
     }
 }
